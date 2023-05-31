@@ -1,0 +1,45 @@
+.gallery__text,
+.gallery__header {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+
+  white-space: pre-wrap;
+}
+.gallery__thumb {
+  position: relative;
+}
+.gallery__category {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  background-color: #4440f6;
+  color: #ffffff;
+  position: absolute;
+  padding: 4px 8px 4px 8px;
+  height: 24;
+  left: 0px;
+  top: 40px;
+  background: rgba(68, 64, 247, 0.7);
+  border-radius: 0px 4px 4px 0px;
+}
+
+.gallery__item{
+  position: relative;
+}
+.gallery__item-bottom_wrap {
+  display: flex;
+  justify-content: space-between;
+}
+
+.favorite__btn-span {
+    display: flex;
+    justify-content: space-between;
+}
+
+.is-hidden {
+    visibility: hidden;
+}
