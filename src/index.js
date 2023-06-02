@@ -27,5 +27,6 @@ if (window.location.pathname === '/favorite.html') {
 }
 if (window.location.pathname === '/read.html') {
   checkRead();
-  refs.container.classList.add('is-hidden')
+  refs.container.classList.add('none')
+  refs.categoriesList.classList.add('none')
 }

@@ -1,0 +1,16 @@
+.dailyFolder {
+    position: relative;
+    // overflow: hidden;
+}
+
+.read_gallery__list{
+position: absolute;
+top: 20;
+left: 0;
+transform: translateY(0);
+transition: transform 500ms ease-in-out 500ms;
+}
+
+.collapsed{
+transform: translateY(-110%);
+}

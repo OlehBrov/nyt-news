@@ -69,9 +69,10 @@ export const dataRender = async markupData => {
   refs.newsGallery.insertAdjacentHTML('afterbegin', renderMarkup);
 };
 
-if (
-  window.location.pathname === '/' ||
-  window.location.pathname === '/index.html'
-) {
-  refs.newsGallery.addEventListener('change', checkboxHandler);
-}
+// if (
+//   window.location.pathname === '/' ||
+//   window.location.pathname === '/index.html'
+// ) {
+//   refs.newsGallery.addEventListener('change', checkboxHandler);
+// }
+ refs.newsGallery.addEventListener('change', checkboxHandler);

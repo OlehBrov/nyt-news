@@ -1,9 +1,8 @@
-import { refs } from "../refs/refs"
-import { ICON_HEART } from "../indexPageJS/popularNews"
-import { removeFavorite } from "./removeFavorites"
+import { refs } from '../refs/refs';
+import { ICON_HEART } from '../indexPageJS/popularNews';
+import { removeFavorite } from './removeFavorites';
 
-export const favoritesPageMarkup = async (favoriteNews) => {
-console.log('favoriteNews', favoriteNews)
+export const favoritesPageMarkup = async favoriteNews => {
   const favoriteMarkup = favoriteNews.map(el => {
     return `<li class="gallery__item">
     <article class="gallery__article">
@@ -30,11 +29,13 @@ console.log('favoriteNews', favoriteNews)
                         }" target="_blank" rel="noreferrer noopener" class="gallery__link">Read more</a>
                     </div>
                 </article>
-             </li>` 
+             </li>`;
+  });
+  // refs.favoritesGallery.innerHTML = '';
+  // refs.favoritesGallery.insertAdjacentHTML('afterbegin', favoriteMarkup);
+  // refs.favoritesGallery.addEventListener('change', removeFavorite);
 
-  })
-  refs.favoritesGallery.innerHTML = '';
-  refs.favoritesGallery.insertAdjacentHTML('afterbegin', favoriteMarkup);
-  refs.favoritesGallery.addEventListener('change', removeFavorite);
-}
-
+  refs.newsGallery.innerHTML = '';
+  refs.newsGallery.insertAdjacentHTML('afterbegin', favoriteMarkup);
+  refs.newsGallery.addEventListener('change', removeFavorite);
+};

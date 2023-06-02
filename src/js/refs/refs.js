@@ -20,6 +20,9 @@ export const refs = {
 
     //Pagination
     container: document.getElementById('tui-pagination-container')
+
+    //Categories selector
+    
 }
 
 // console.log(openSearchFieldButton)

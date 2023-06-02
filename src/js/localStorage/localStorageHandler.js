@@ -8,6 +8,10 @@ if (
   refs.newsGallery.addEventListener('click', favoritesToLS);
 }
 
+if (window.location.pathname === '/read.html') {
+  refs.newsGallery.addEventListener('click', favoritesToLS);
+}
+
 const readFromLS = localStorage.getItem('read-news')
   ? JSON.parse(localStorage.getItem('read-news'))
   : [];
@@ -20,11 +24,12 @@ export async function toLS(e) {
   if (e.target.nodeName === 'A') {
     console.log(
       'e.target.parentNode.parentNode.childNodes',
-      e.target.parentNode.parentNode.childNodes[1].lastElementChild.src
+      e.target.parentNode.parentNode.childNodes[1].childNodes[3].textContent
     );
     const readObj = {
       alt: e.target.parentNode.parentNode.childNodes[1].children[1].alt,
       header: e.target.parentNode.parentNode.childNodes[3].textContent,
+      category: e.target.parentNode.parentNode.childNodes[1].childNodes[3].textContent,
       src: e.target.parentNode.parentNode.childNodes[1].lastElementChild.src,
       text: e.target.parentNode.parentNode.childNodes[5].textContent,
       source:
