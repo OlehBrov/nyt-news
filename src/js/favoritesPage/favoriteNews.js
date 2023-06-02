@@ -1,8 +1,9 @@
 import { refs } from "../refs/refs"
 import { ICON_HEART } from "../indexPageJS/popularNews"
+import { removeFavorite } from "./removeFavorites"
 
 export const favoritesPageMarkup = async (favoriteNews) => {
- 
+console.log('favoriteNews', favoriteNews)
   const favoriteMarkup = favoriteNews.map(el => {
     return `<li class="gallery__item">
     <article class="gallery__article">
@@ -14,26 +15,26 @@ export const favoritesPageMarkup = async (favoriteNews) => {
                     ? 'https://t3.ftcdn.net/jpg/04/62/93/66/360_F_462936689_BpEEcxfgMuYPfTaIAOC1tCDurmsno7Sp.jpg'
                     : el.img
                 }" alt="${el.alt}"/>
-                 <button type="button" class="gallery__favorite__btn ">
-                         <span class="favorite__btn-span">Add to favorite 
-                           <svg width='16' height='16'><use href="${ICON_HEART}"></use>
-                    </svg> </span>
-                    <span class="favorite__btn-span remove-btn is-hidden">Remove from favorite
-                                    <svg width='16' height='16'><use href="${ICON_HEART}"></use>
-                    </svg></span>
-                          </button>         
+ <label class="checkbox_toFavorite-container"> Remove from favorites 
+                    <input type="checkbox" name="isFavorite" class="favorite_checkbox" checked/>
+                      <svg width='16' height='16'><use class="checkmark" href="${ICON_HEART}"></use>
+                    </svg>
+              </label>        
                     </div>
                     <h3 class="gallery__header">${el.title}</h3>
                     <p class="gallery__text">${el.description}</p>
                     <div class="gallery__item-bottom_wrap">
                         <span class="gallery__date">${el.date}</span>
                         <a href="${
-                          el.url
+                          el.src
                         }" target="_blank" rel="noreferrer noopener" class="gallery__link">Read more</a>
                     </div>
                 </article>
              </li>` 
 
   })
-   refs.favoritesGallery.insertAdjacentHTML('afterbegin', favoriteMarkup);
+  refs.favoritesGallery.innerHTML = '';
+  refs.favoritesGallery.insertAdjacentHTML('afterbegin', favoriteMarkup);
+  refs.favoritesGallery.addEventListener('change', removeFavorite);
 }
+

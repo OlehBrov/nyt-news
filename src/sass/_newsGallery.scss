@@ -43,3 +43,28 @@
 .is-hidden {
     visibility: hidden;
 }
+
+
+
+.checkbox_toFavorite-container{
+position: absolute;
+bottom: 0;
+right: 0;
+padding: 5px;
+}
+
+.favorite_checkbox{
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkmark{
+fill: none;
+}
+
+.checkbox_toFavorite-container input:checked ~ svg >.checkmark {
+  fill: #4440f6;
+}

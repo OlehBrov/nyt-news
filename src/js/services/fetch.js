@@ -3,10 +3,19 @@ import axios from 'axios';
 const baseUrl = 'https://api.nytimes.com';
 const apiKey = 'TSw2QdOoFucel7ybh9h7kC4obHmkxxGl';
 
-export const getNews = async endpoint => {
-  const url = `${baseUrl}${endpoint}?&api-key=${apiKey}`;
-  const { data } = await axios(url);
-  return data;
+export const getNews = async (endpoint, searchParams) => {
+  const url = `${baseUrl}${endpoint}`;
+  
+    const { data } = await axios(url, {
+      params: {
+        "api-key": apiKey,
+        "q": searchParams,
+      }
+    })
+  console.log('data axios', data)
+    return data;
+  
+  
 };
 
 // async function fetchNews(endpoint, queryParams = {}) {

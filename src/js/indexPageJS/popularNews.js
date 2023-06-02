@@ -1,22 +1,48 @@
 import { getNews } from '../services/fetch';
 import { refs } from '../refs/refs';
+import { checkboxHandler } from '../utils/checkboxHandler';
+import { paginationInstance } from '../services/pagination';
+import { paginate } from '../services/pagination';
+import { toPagination } from '../services/pagination';
+import { getSections } from './sectionsFilter';
 export const ICON_HEART = '/sprite.f14d31f7.svg#icon-heart';
 
 export const newsGalleryMarkup = async () => {
   const { results } = await getNews('/svc/mostpopular/v2/viewed/1.json');
-  
-  const markup = results.map(el => {
-    const publicDate = new Date(el.published_date);
-    const formattedDate = new Intl.DateTimeFormat('uk-UA').format(publicDate);
-    const caption = el.media.length
-      ? el.media[0].caption
-      : 'Alt is not available';
-    return `<li class="gallery__item">
+  mainPageMarkup(results);
+  getSections()
+};
+
+export const mainPageMarkup = async markupData => {
+  // paginationInstance.setTotalItems(markupData.length);
+  // paginationInstance.setItemsPerPage(5);
+  await toPagination(markupData, 'top');
+  paginate(markupData);
+};
+
+export const dataRender = async markupData => {
+// console.log('dataRender fires')
+  const renderMarkup = await markupData
+    .map(el => {
+      const publicDate = new Date(el.published_date);
+      const formattedDate = new Intl.DateTimeFormat('uk-UA').format(publicDate);
+      
+      const caption = el.media.length 
+        ? el.media[0].caption 
+        : 'Alt is not available';
+      
+      
+      return `<li class="gallery__item">
     <article class="gallery__article">
               <div class="gallery__thumb">
-              <label class="checkbox_toFavorite"> Add to Favorite
+             
+              <label class="checkbox_toFavorite-container"> Add to Favorite 
                     <input type="checkbox" name="isFavorite" class="favorite_checkbox" />
-                    </label>
+                      <svg width='16' height='16'><use class="checkmark" href="${ICON_HEART}"></use>
+                    </svg>
+              </label>
+                  
+                   
               <p class="gallery__category">${el.section}</p>
                 <img class="gallery__img" src="${
                   el.media.length === 0
@@ -36,26 +62,16 @@ export const newsGalleryMarkup = async () => {
                     </div>
                 </article>
              </li>`;
-  });
+    })
+    .join('');
 
-  refs.newsGallery.insertAdjacentHTML('afterbegin', markup);
+  refs.newsGallery.innerHTML = '';
+  refs.newsGallery.insertAdjacentHTML('afterbegin', renderMarkup);
 };
 
-const checkboxHandler = e => {
-  // console.dir('target', e.target);
-  if (e.target.type !== 'checkbox') return;
-
-  // e.target.parentNode.textContent ? "Add to favorite" : "Remove from favorite"
-
-
-};
-refs.newsGallery.addEventListener('change', checkboxHandler);
-
-/*  <button type="button" class="gallery__favorite__btn ">
-                         <span class="favorite__btn-span">Add to favorite 
-                           <svg width='16' height='16'><use href="${ICON_HEART}"></use>
-                    </svg> </span>
-                    <span class="favorite__btn-span remove-btn is-hidden">Remove from favorite
-                                    <svg width='16' height='16'><use href="${ICON_HEART}"></use>
-                    </svg></span>
-                          </button>*/
+if (
+  window.location.pathname === '/' ||
+  window.location.pathname === '/index.html'
+) {
+  refs.newsGallery.addEventListener('change', checkboxHandler);
+}

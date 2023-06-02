@@ -11,63 +11,80 @@ if (
 const readFromLS = localStorage.getItem('read-news')
   ? JSON.parse(localStorage.getItem('read-news'))
   : [];
+console.log('readFromLS on top', readFromLS);
 
-export function toLS(e) {
-  if (e.target.nodeName === 'A' || e.target.className === 'favorite__btn-span') {
-    
+export async function toLS(e) {
+  console.log('e.target', e.target);
+  console.log('e.target', e.target.nodeName);
+
+  if (e.target.nodeName === 'A') {
+    console.log(
+      'e.target.parentNode.parentNode.childNodes',
+      e.target.parentNode.parentNode.childNodes[1].lastElementChild.src
+    );
+    const readObj = {
+      alt: e.target.parentNode.parentNode.childNodes[1].children[1].alt,
+      header: e.target.parentNode.parentNode.childNodes[3].textContent,
+      src: e.target.parentNode.parentNode.childNodes[1].lastElementChild.src,
+      text: e.target.parentNode.parentNode.childNodes[5].textContent,
+      source:
+        e.target.parentNode.parentNode.childNodes[7].lastElementChild.href,
+      readDate: getUserTime(),
+    };
+    console.log('readFromLS inside toLS', readFromLS);
+    const checked = checkIfSaved(readObj);
   }
-  if (e.target.nodeName !== 'A') {
-    return;
-  }
-
-  const readObj = {
-    alt: e.target.parentNode.parentNode.childNodes[1].children[1].alt,
-    header: e.target.parentNode.parentNode.childNodes[3].textContent,
-    src: e.target.parentNode.parentNode.childNodes[1].children[1].src,
-    text: e.target.parentNode.parentNode.childNodes[5].textContent,
-    readDate: getUserTime(),
-  };
-
-  checkIfSaved(readObj);
-  readFromLS.push(readObj);
-
-  localStorage.setItem('read-news', JSON.stringify(readFromLS));
 }
 
 export async function favoritesToLS(e) {
-  if (e.target.className !== 'favorite__btn-span') return;
-
+  if (e.target.type !== 'checkbox') return;
   const favoritesFromLS = (await localStorage.getItem('favorite-news'))
     ? JSON.parse(localStorage.getItem('favorite-news'))
     : [];
 
-  const favoriteObj = {
-    title: e.target.parentNode.parentNode.parentNode.childNodes[3].textContent,
-    img: e.target.parentNode.parentNode.childNodes[3].attributes.src.nodeValue,
-    alt: e.target.parentNode.parentNode.parentNode.childNodes[1].children[1].alt,
-    category: e.target.parentNode.parentNode.childNodes[1].innerText,
-    description:
-      e.target.parentNode.parentNode.parentNode.childNodes[5].textContent,
-    date: e.target.parentNode.parentNode.parentNode.lastElementChild.children[0]
-      .textContent,
-    src: e.target.parentNode.parentNode.parentNode.lastElementChild
-      .lastElementChild.href,
-    favorite: 'true',
-    source:
-      e.target.parentNode.parentNode.lastElementChild.children[1].attributes[0]
-        .value,
-  };
+  if (e.target.checked) {
+    console.log('favoritesToLS checked');
+    const favoriteObj = {
+      title:
+        e.target.parentNode.parentNode.parentNode.childNodes[3].textContent,
+      img: e.target.parentNode.parentNode.parentNode.childNodes[1]
+        .lastElementChild.src,
+      alt: e.target.parentNode.parentNode.parentNode.childNodes[1].children[1]
+        .alt,
+      category: e.target.parentNode.parentNode.childNodes[1].innerText,
+      description:
+        e.target.parentNode.parentNode.parentNode.childNodes[5].textContent,
+      date: e.target.parentNode.parentNode.parentNode.lastElementChild
+        .children[0].textContent,
+      src: e.target.parentNode.parentNode.parentNode.lastElementChild
+        .lastElementChild.href,
+      favorite: 'true',
+      source:
+        e.target.parentNode.parentNode.parentNode.lastElementChild
+          .lastElementChild.href,
+    };
 
-  const index = await checkIfFavorite(favoriteObj, favoritesFromLS);
-  if (index === -1) {
     favoritesFromLS.push(favoriteObj);
     await localStorage.setItem(
       'favorite-news',
       JSON.stringify(favoritesFromLS)
     );
-  } else console.log("This article is already in favorites")
+    console.log('added to favorites');
+  }
 
-  // favoritesPageMarkup(favoritesFromLS)
+  if (!e.target.checked) {
+    const source =
+      e.target.parentNode.parentNode.parentNode.lastElementChild
+        .lastElementChild.href;
+    const index = favoritesFromLS.findIndex(el => {
+      return el.src === source;
+    });
+    favoritesFromLS.splice(index, 1);
+    await localStorage.setItem(
+      'favorite-news',
+      JSON.stringify(favoritesFromLS)
+    );
+  }
 }
 
 function getUserTime(t = new Date()) {
@@ -80,23 +97,30 @@ function addLeadingZero(value) {
   return value.toString().padStart(2, '0');
 }
 
-function checkIfSaved(readObj) {
-  readFromLS.map((el, currentIndex) => {
-    if (readObj.src === el.src) {
-      return readFromLS.splice(currentIndex, 1);
-    }
+function checkIfSaved(toSaveObj) {
+  if (readFromLS.length === 0) {
+    saveReadtoLS(readFromLS, toSaveObj);
     return;
-  });
+  }
+
+  const duplicateIndex = readFromLS.findIndex(
+    el => el.source === toSaveObj.source
+  );
+  if (duplicateIndex === -1) {
+    saveReadtoLS(readFromLS, toSaveObj);
+    return;
+  }
+  readFromLS.splice(duplicateIndex, 1, toSaveObj);
+  localStorage.setItem('read-news', JSON.stringify(readFromLS));
 }
 
-async function checkIfFavorite({ src }, local) {
-  return (index = local.findIndex(el => {
-    return el.src === src;
-  }));
-  //  return favoritesFromLS.push(favoriteObj)
-  //   const index = favoritesFromLS.find((el, index) => {
-  //     favoriteObj.src === el.src;
-  //       return index;
-  //   });
-  //     console.log('index', index)
-}
+const saveReadtoLS = (newsArray, newsObj) => {
+  newsArray.push(newsObj);
+  localStorage.setItem('read-news', JSON.stringify(newsArray));
+};
+
+// async function checkIfFavorite({ src }, local) {
+//   return (index = local.findIndex(el => {
+//     return el.src === src;
+//   }));
+// }

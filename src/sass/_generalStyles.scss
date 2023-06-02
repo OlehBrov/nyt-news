@@ -126,9 +126,9 @@ button {
     box-shadow: none;
 }
 
-svg {
-    fill: currentColor;
-}
+// svg {
+//     fill: currentColor;
+// }
 
 
 .checkbox_toFavorite{
@@ -138,5 +138,12 @@ svg {
 // display: none;
 &:checked{
     content: 'Remove from favorites';
+    .checkmark {
+            fill: #4440f6;
+        }
 }
+}
+
+.none{
+    display: none;
 }

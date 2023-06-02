@@ -10,12 +10,16 @@ export const refs = {
     //Main Page gallery
     newsGallery: document.querySelector('.news-gallery_list'),
     readMoreLink: document.querySelector('.gallery__link'),
+    categoriesList: document.querySelector('.sections-list'),
 
     //Favorites page
     favoritesGallery: document.querySelector('.favorites_gallery-list'),
 
     //Read page
     readGallery: document.querySelector('.read_gallery-list'),
+
+    //Pagination
+    container: document.getElementById('tui-pagination-container')
 }
 
 // console.log(openSearchFieldButton)

@@ -1,7 +1,12 @@
 import { refs } from "../refs/refs";
 import { ICON_HEART } from "../indexPageJS/popularNews";
 
+
+
+
+
 export const readPageMarkup = (readNews) => {
+  console.log('readNews', readNews)
     const readMurkup = readNews.map(el => {
         return `<li class="gallery__item">
     <article class="gallery__article">
