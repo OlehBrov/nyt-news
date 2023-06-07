@@ -11,18 +11,19 @@ export const readPageMarkup = readNews => {
   });
   console.log('folders', folders);
 
-  const dailyFoldersMarkup = folders.map(el => {
-    return `<div class = "dailyFolder dated=${el.toString()}"><p class="folderDate">${el.toString()}</p><ul class = "read_gallery__list"></ul></div>`;
-  });
+  const dailyFoldersMarkup = folders
+    .map((el, index) => {
+      return `<li class="news-gallery_list-item"><div class="accordion-container-${index} dailyFolder"><p class="folderDate">${el.toString()}</p><ul class = "read_gallery__list"></ul></div></li>`;
+    }).join('');
 
   refs.newsGallery.insertAdjacentHTML('afterbegin', dailyFoldersMarkup);
-  dailyFolder = document.querySelectorAll('.dailyFolder');
+  dailyItem = document.querySelectorAll('.news-gallery_list-item');
 
   dailyPageMarkup(readNews);
 };
 
 export const dailyPageMarkup = readNewsforDay => {
-  dailyFolder.forEach((day, index) => {
+  dailyItem.forEach((day, index) => {
     const singleDayMarkup = readNewsforDay
       .map(el => {
         if (day.firstElementChild.innerText === el.readDate) {
@@ -57,19 +58,23 @@ export const dailyPageMarkup = readNewsforDay => {
       })
       .join('');
 
-    dailyFolder[index].lastElementChild.insertAdjacentHTML(
+    dailyItem[index].lastElementChild.insertAdjacentHTML(
       'beforeend',
       singleDayMarkup
     );
   });
-
 };
 
-
-const collapseHandler = (e) => {
-  if(e.target.className !== "folderDate") return
-  console.log('e.target', e.target.nextSibling)
+const collapseHandler = e => {
+  if (e.target.className !== 'folderDate') return;
+  
   const list = e.target.nextSibling;
-  list.classList.toggle('collapsed')
-}
-refs.newsGallery.addEventListener('click', collapseHandler)
+  list.classList.toggle('collapsed');
+  console.log('list', list)
+  // if (list.style.maxHeight) {
+  //   list.style.maxHeight = null;
+  // } else {
+  //   list.style.maxHeight = list.scrollHeight + 'px';
+  // }
+};
+refs.newsGallery.addEventListener('click', collapseHandler);

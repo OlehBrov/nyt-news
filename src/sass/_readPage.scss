@@ -4,13 +4,17 @@
 }
 
 .read_gallery__list{
-position: absolute;
-top: 20;
-left: 0;
+// position: absolute;
+// top: 20;
+// left: 0;
 transform: translateY(0);
-transition: transform 500ms ease-in-out 500ms;
+// transition: transform 500ms ease-in-out 500ms, visibility 500ms ease-in-out 500ms;
+overflow: hidden;
+max-height: 0;
+transition: max-height 0.2s ease-out;
 }
 
 .collapsed{
 transform: translateY(-110%);
+visibility: hidden;
 }
