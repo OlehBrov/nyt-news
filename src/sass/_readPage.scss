@@ -4,17 +4,20 @@
 }
 
 .read_gallery__list{
-// position: absolute;
-// top: 20;
-// left: 0;
+    display: block;
+position: absolute;
+top: 20;
+left: 0;
+transition: transform 500ms ease-in-out 500ms;
 transform: translateY(0);
-// transition: transform 500ms ease-in-out 500ms, visibility 500ms ease-in-out 500ms;
+//visibility 500ms ease-in-out 500ms
 overflow: hidden;
-max-height: 0;
-transition: max-height 0.2s ease-out;
+// max-height: 0;
+// transition: max-height 0.2s ease-out;
 }
 
 .collapsed{
 transform: translateY(-110%);
-visibility: hidden;
+// transform: translate(0px, 50px);
+// visibility: hidden;
 }
