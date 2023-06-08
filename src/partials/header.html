@@ -24,16 +24,17 @@
         </svg>
       </button>
 
-      <form name="search-form" class="form_search-field seach_form-hide" id="form-field">
-        <button class="search-field__btn" id="form-btn" type="submit">
+      <form name="search-form" class="form_search-field " id="form-field">
+        <!-- seach_form-hide -->
+        <input type="text" name="search_query" class="search_input" id="search-field__input" placeholder="Search" />
+        <button type="submit" class="search-field__btn" form="form-field" id="form-btn" >
           <svg class="search__icon" width="20" height="20">
             <use href="./images/sprite.svg#icon-bx_search"></use>
           </svg>
         </button>
-        <input type="text" name="search_query" id="search-field__input" placeholder="Search" />
       </form>
     </div>
-    <!-- <div class="theme">
+    <div class="theme">
       <svg class="theme__svg sun" width="21" height="21">
         <use href="./images/sprite.svg#icon-sun"></use>
       </svg>
@@ -46,7 +47,7 @@
       <svg class="theme__svg moon" width="21" height="21">
         <use href="./images/sprite.svg#icon-moon"></use>
       </svg>
-    </div> -->
+    </div>
     <button
       type="button"
       class="mobile-button js-open-menu burger-menu"

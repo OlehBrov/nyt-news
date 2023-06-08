@@ -36,7 +36,7 @@ export const sectionedMarkup = (markupData) => {
                     </div>
                 </article>
              </li>`;
-  });
+  }).join('');
   // console.log('markup', markup)
   refs.newsGallery.innerHTML = '';
   refs.newsGallery.insertAdjacentHTML('afterbegin', markup);

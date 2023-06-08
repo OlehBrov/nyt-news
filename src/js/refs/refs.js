@@ -6,6 +6,7 @@ export const refs = {
     jsCloseMenu: document.querySelector('.js-close-menu'),
     headerSearchField: document.querySelector('.search-field'),
     mobileViewMenu: document.querySelector('.js-menu-container'),
+    runSearchBtn: document.querySelector('.search-field__btn'),
 
     //Main Page gallery
     newsGallery: document.querySelector('.news-gallery_list'),
@@ -19,9 +20,11 @@ export const refs = {
     readGallery: document.querySelector('.read_gallery-list'),
 
     //Pagination
-    container: document.getElementById('tui-pagination-container')
+    container: document.getElementById('tui-pagination-container'),
 
-    //Categories selector
+    //Theme switcher
+    themeSwitcher: document.querySelector('.theme'),
+    body: document.querySelector('body')
     
 }
 

@@ -36,7 +36,7 @@ export async function toLS(e) {
         e.target.parentNode.parentNode.childNodes[7].lastElementChild.href,
       readDate: getUserTime(),
     };
-    console.log('readFromLS inside toLS', readFromLS);
+   
     const checked = checkIfSaved(readObj);
   }
 }

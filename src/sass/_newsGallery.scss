@@ -1,3 +1,21 @@
+.news-gallery_list {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  @include tablet {
+    gap: 30px;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}
+.gallery__item{
+  @include tablet{
+width: calc((100% - 30px) / 2);
+  }
+  @include desktop {
+    width: calc((100% - 60px) / 3);
+  }
+}
 .gallery__text,
 .gallery__header {
   overflow: hidden;
@@ -27,7 +45,7 @@
   border-radius: 0px 4px 4px 0px;
 }
 
-.gallery__item{
+.gallery__item {
   position: relative;
 }
 .gallery__item-bottom_wrap {
@@ -36,24 +54,22 @@
 }
 
 .favorite__btn-span {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 .is-hidden {
-    visibility: hidden;
+  visibility: hidden;
 }
 
-
-
-.checkbox_toFavorite-container{
-position: absolute;
-bottom: 0;
-right: 0;
-padding: 5px;
+.checkbox_toFavorite-container {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 5px;
 }
 
-.favorite_checkbox{
+.favorite_checkbox {
   position: absolute;
   opacity: 0;
   cursor: pointer;
@@ -61,10 +77,10 @@ padding: 5px;
   width: 0;
 }
 
-.checkmark{
-fill: none;
+.checkmark {
+  fill: none;
 }
 
-.checkbox_toFavorite-container input:checked ~ svg >.checkmark {
+.checkbox_toFavorite-container input:checked ~ svg > .checkmark {
   fill: #4440f6;
 }

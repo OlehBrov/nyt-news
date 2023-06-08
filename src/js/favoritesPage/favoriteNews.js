@@ -30,7 +30,7 @@ export const favoritesPageMarkup = async favoriteNews => {
                     </div>
                 </article>
              </li>`;
-  });
+  }).join('');
   // refs.favoritesGallery.innerHTML = '';
   // refs.favoritesGallery.insertAdjacentHTML('afterbegin', favoriteMarkup);
   // refs.favoritesGallery.addEventListener('change', removeFavorite);

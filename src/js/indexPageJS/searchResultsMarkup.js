@@ -38,7 +38,7 @@ export const searchResultsMarkup = markupData => {
                     </div>
                 </article>
              </li>`;
-  });
+  }).join('');
   // console.log('markup', markup)
   refs.newsGallery.innerHTML = '';
   refs.newsGallery.insertAdjacentHTML('afterbegin', markup);

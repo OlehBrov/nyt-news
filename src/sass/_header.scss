@@ -35,18 +35,21 @@ body.darkMode {
 }
 
 .header {
+  align-items: center;
+  display: flex;
   min-height: 81px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
 
 .header-container {
   display: flex;
+  width: 100%;
   align-items: center;
 
-  &-tablet,
-  &-desktop {
-    align-items: none;
-  }
+  //   &-tablet,
+  //   &-desktop {
+  //     align-items: none;
+  //   }
 }
 
 .logo {
@@ -54,18 +57,18 @@ body.darkMode {
   font-size: 24px;
   line-height: calc(33 / 24);
   display: inline-block;
-  padding: 24px 0;
+  // padding: 24px 0;
   margin-right: auto;
 
-  &-tablet {
-    padding-top: 32px;
-    padding-bottom: 30px;
+  @include tablet {
+    // padding-top: 32px;
+    // padding-bottom: 30px;
     font-size: 32px;
     line-height: calc(44 / 32);
   }
 
-  &-desktop {
-    padding: 28px 0;
+  @include desktop {
+    // padding: 28px 0;
     font-size: 42px;
     line-height: calc(57 / 42);
   }
@@ -74,17 +77,13 @@ body.darkMode {
 .navbar {
   display: none;
 
-  &-mobile {
-    display: none;
-  }
-
-  &-tablet {
+  @include tablet {
     display: flex;
     margin-left: 48px;
     gap: 44px;
   }
 
-  &-desktop {
+  @include desktop {
     display: flex;
     margin-left: 102px;
     gap: 69px;
@@ -92,12 +91,6 @@ body.darkMode {
 }
 
 .navbar__item {
-  padding-top: 48px;
-  padding-bottom: 36px;
-  @include desktop {
-    padding-top: 55px;
-    padding-bottom: 33px;
-  }
 }
 
 .navbar__link {
@@ -138,13 +131,17 @@ body.darkMode {
   display: block;
   top: 10px;
   right: 5px;
-  &-hidden{
+  &-hidden {
+    display: none;
+  }
+  @include tablet {
     display: none;
   }
 }
-
-.seach_form-hide {
-  transform: translateX(100%);
+@include mobile {
+  .seach_form-hide {
+    transform: translateX(100%);
+  }
 }
 
 .form_search-field {
@@ -160,21 +157,21 @@ body.darkMode {
   transition: transform 500ms linear;
 
   @include tablet {
-    border: 1px solid var(--text-color);
-    border-radius: 20px;
-    margin-top: 44px;
-    margin-bottom: 31px;
-    width: 213px;
+    // border: 1px solid var(--text-color);
+    // border-radius: 20px;
+    // margin-top: 44px;
+    // margin-bottom: 31px;
+    // width: 213px;
   }
 
   @include desktop {
-    margin: 0 auto;
-    width: 288px;
-    margin-top: 51px;
-    margin-bottom: 31px;
+    // margin: 0 auto;
+    // width: 288px;
+    // margin-top: 51px;
+    // margin-bottom: 31px;
   }
 
-  input {
+  .search_input {
     position: absolute;
     bottom: 0;
     right: 0;
@@ -190,6 +187,18 @@ body.darkMode {
     outline: none;
     padding-left: 48px;
     background: none;
+    @include tablet {
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 1.71;
+      /* or 171% */
+    }
+    // @include tablet {
+    //   padding: 5px 0;
+    //   font-size: 14px;
+    //   line-height: calc(24 / 14);
+    //   height: 31px;
+    // }
     // transition: 0.4s;
     // width: 0;
 
@@ -209,11 +218,6 @@ body.darkMode {
     //   transition: 0.4s;
     //   width: 0;
     // }
-    @include tablet {
-      padding: 5px 0;
-      font-size: 14px;
-      line-height: calc(24 / 14);
-    }
     // @media screen and (min-width: $pre_tablet) {
     //   padding: 5px 0;
     //   font-size: 14px;
@@ -250,6 +254,7 @@ body.darkMode {
   //   }
   @include tablet {
     padding: 8px 19px 8px 14px;
+    top: 0;
   }
   //   @media screen and (min-width: $pre_tablet) {
   //     padding: 8px 19px 8px 14px;
@@ -264,44 +269,45 @@ body.darkMode {
   margin-left: 14px;
 }
 
-// .theme {
-//   gap: 8px;
+.theme {
+  gap: 8px;
 
-//   @media screen and (max-width: $pre_tablet) {
-//     display: none;
-//     opacity: 0;
-//     pointer-events: none;
-//     visibility: hidden;
+  &.mobile {
+    display: flex;
+    position: absolute;
+    z-index: 6;
+    bottom: 18;
+    opacity: 100%;
+    pointer-events: all;
+    visibility: inherit;
 
-//     &.mobile {
-//       display: flex;
-//       position: absolute;
-//       z-index: 6;
-//       bottom: 18;
-//       opacity: 100%;
-//       pointer-events: all;
-//       visibility: inherit;
-//     }
-//   }
+    @include tablet {
+      display: none;
+      opacity: 0;
+      pointer-events: none;
+      visibility: hidden;
+    }
+  }
 
-//   @media screen and (min-width: $pre_tablet) {
-//     display: flex;
-//     width: 98px;
-//     height: 21px;
-//     margin-left: 24px;
-//     margin-top: 49px;
-//     margin-bottom: 36px;
-//   }
+@include tablet{
+display: flex;
+  width: 98px;
+  height: 21px;
+  margin-left: 24px;
+  margin-top: 49px;
+  margin-bottom: 36px;
+}
 
-//   @media screen and (min-width: $pre_desktop) {
-//     gap: 12px;
-//     width: 148px;
-//     height: 24px;
-//     margin: 0;
-//     margin-top: 54px;
-//     margin-bottom: 35px;
-//   }
-// }
+@include desktop{
+gap: 12px;
+  width: 148px;
+  height: 24px;
+  margin: 0;
+  margin-top: 54px;
+  margin-bottom: 35px;
+}
+
+}
 
 .mobile-button {
   .icon {

@@ -49,6 +49,9 @@ body {
     font-weight: 400;
     color: var(--text-color);
     background-color: var(--white-color);
+    &.darkMode{
+        background-color: #2e2e2e;
+    }
 }
 
 button {

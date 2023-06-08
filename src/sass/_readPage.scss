@@ -1,23 +1,42 @@
 .dailyFolder {
-    position: relative;
-    // overflow: hidden;
+  position: relative;
+  // overflow: hidden;
 }
 
-.read_gallery__list{
-    display: block;
-position: absolute;
-top: 20;
-left: 0;
-transition: transform 500ms ease-in-out 500ms;
-transform: translateY(0);
-//visibility 500ms ease-in-out 500ms
-overflow: hidden;
-// max-height: 0;
-// transition: max-height 0.2s ease-out;
+.read_gallery__list {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  // position: absolute;
+  // top: 20;
+  // left: 0;
+  transition: transform 500ms ease-in-out 500ms, max-height 500ms ease-out 500ms;
+  // transition: max-height 0.2s ease-out;
+  transform: translateY(0);
+  //visibility 500ms ease-in-out 500ms
+  overflow: hidden;
+  max-height: 0;
+  // transition: max-height 0.2s ease-out;
+  @include tablet {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
 }
 
-.collapsed{
-transform: translateY(-110%);
-// transform: translate(0px, 50px);
-// visibility: hidden;
+.collapsed {
+  transform: translateY(-100%);
+  // transform: translate(0px, 50px);
+  visibility: hidden;
+  // display: none;
+}
+
+.news-gallery_list-item {
+  display: block;
+  max-height: fit-content;
+}
+
+.dailyFolder {
+  display: block;
+  max-height: fit-content;
 }

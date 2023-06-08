@@ -1,4 +1,5 @@
-
+import { paginate } from "../services/pagination";
+import { screenWidthHandler } from "./screenWidthHandler";
 
 const screen = {
   mobile: window.matchMedia('(min-width: 300px)'),
@@ -7,15 +8,17 @@ const screen = {
 };
 
 for (let [scr, mq] of Object.entries(screen)) {
+
   if (mq) mq.addEventListener('change', mqHandler);
 }
 export function mqHandler() {
-  let size = null;
-  let toRemove = [];
+  console.log('mqHandler')
   for (let [scr, mq] of Object.entries(screen)) {
     if (!mq || mq.matches) {
       size = scr;
-    } else if (scr !== size) toRemove.push(scr);
+      screenWidthHandler(size)
+      paginate()
+    } else if (scr !== size) {console.log('src', scr)};
   }
-
 }
+

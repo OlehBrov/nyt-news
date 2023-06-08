@@ -13,7 +13,7 @@ export const readPageMarkup = readNews => {
 
   const dailyFoldersMarkup = folders
     .map((el, index) => {
-      return `<li class="news-gallery_list-item"><div class="accordion-container-${index} dailyFolder"><p class="folderDate">${el.toString()}</p><ul class = "read_gallery__list"></ul></div></li>`;
+      return `<li class="news-gallery_list-item"><div class="accordion-container-${index} dailyFolder"><p class="folderDate">${el.toString()}</p><ul class = "read_gallery__list collapsed"></ul></div></li>`;
     }).join('');
 
   refs.newsGallery.insertAdjacentHTML('afterbegin', dailyFoldersMarkup);
@@ -74,10 +74,11 @@ const collapseHandler = e => {
   const list = e.target.nextSibling;
   list.classList.toggle('collapsed');
   console.log('list', list)
-  // if (list.style.maxHeight) {
-  //   list.style.maxHeight = null;
-  // } else {
-  //   list.style.maxHeight = list.scrollHeight + 'px';
-  // }
+ 
+  if (list.style.maxHeight) {
+    list.style.maxHeight = null;
+  } else {
+    list.style.maxHeight = list.scrollHeight + 'px';
+  }
 };
 refs.newsGallery.addEventListener('click', collapseHandler);

@@ -5,8 +5,7 @@ import { refs } from '../refs/refs';
 import { favoritesPageMarkup } from '../favoritesPage/favoriteNews';
 import { searchResultsMarkup } from '../indexPageJS/searchResultsMarkup';
 import { sectionedMarkup } from '../indexPageJS/sectionsMarkup';
-
-console.log('pagination');
+import { currentScreenWidth } from '../utils/screenWidthHandler';
 
 const container = document.getElementById('tui-pagination-container');
 
@@ -36,13 +35,25 @@ export const toPagination = async (renderMarkup, parentKey) => {
   newsData.setKey(parentKey);
   newsData.setData(renderMarkup);
   await paginationInstance.setTotalItems(renderMarkup.length);
-  await paginationInstance.setItemsPerPage(4);
+
+
+
   options.totalItems = renderMarkup.length;
   paginationInstance.reset();
 
   paginate();
 };
 export const paginate = async () => {
+  console.log('paginate fires')
+    if ((await currentScreenWidth.w) === 'mobile') {
+    options.itemsPerPage = 4;
+  }
+  if ((await currentScreenWidth.w) === 'tablet') {
+    options.itemsPerPage = 7;
+  }
+  if ((await currentScreenWidth.w) === 'desktop') {
+    options.itemsPerPage = 8;
+  }
   const currentPage = paginationInstance.getCurrentPage();
 
   const startIdx = options.itemsPerPage * currentPage - options.itemsPerPage;
