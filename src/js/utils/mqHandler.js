@@ -1,4 +1,5 @@
-import { paginate } from "../services/pagination";
+import { createPaginationInstance, paginate } from "../services/pagination";
+import { renderWeather } from "../weatherWidget.js/weatherWidgetMarkup";
 import { screenWidthHandler } from "./screenWidthHandler";
 
 const screen = {
@@ -12,12 +13,14 @@ for (let [scr, mq] of Object.entries(screen)) {
   if (mq) mq.addEventListener('change', mqHandler);
 }
 export function mqHandler() {
-  console.log('mqHandler')
+
   for (let [scr, mq] of Object.entries(screen)) {
     if (!mq || mq.matches) {
       size = scr;
       screenWidthHandler(size)
       paginate()
+      // createPaginationInstance(size)
+      // renderWeather()
     } else if (scr !== size) {console.log('src', scr)};
   }
 }

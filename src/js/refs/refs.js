@@ -23,9 +23,9 @@ export const refs = {
     container: document.getElementById('tui-pagination-container'),
 
     //Theme switcher
+    themeSlider: document.querySelector('.switch-checkbox'),
     themeSwitcher: document.querySelector('.theme'),
     body: document.querySelector('body')
     
 }
 
-// console.log(openSearchFieldButton)

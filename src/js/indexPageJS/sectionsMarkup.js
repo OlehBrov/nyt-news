@@ -1,18 +1,21 @@
-import { refs } from "../refs/refs";
+import { refs } from '../refs/refs';
 export const ICON_HEART = '/sprite.f14d31f7.svg#icon-heart';
 
-
-export const sectionedMarkup = (markupData) => {
-  const markup = markupData.map(el => {
-    const publicDate = new Date(el.created_date);
+export const sectionedMarkup = markupData => {
+  const markup = markupData
+    .map(el => {
+      const publicDate = new Date(el.created_date);
 
       const formattedDate = new Intl.DateTimeFormat().format(publicDate);
-      
-    const caption = el.multimedia ? el.multimedia[0].caption
-      : 'Alt is not available';
-    const imgSource = el.multimedia && el.multimedia.length ? `${el.multimedia[1].url}` : 'https://t3.ftcdn.net/jpg/04/62/93/66/360_F_462936689_BpEEcxfgMuYPfTaIAOC1tCDurmsno7Sp.jpg'
-       ;
-    return `<li class="gallery__item">
+
+      const caption = el.multimedia
+        ? el.multimedia[0].caption
+        : 'Alt is not available';
+      const imgSource =
+        el.multimedia && el.multimedia.length
+          ? `${el.multimedia[1].url}`
+          : 'https://t3.ftcdn.net/jpg/04/62/93/66/360_F_462936689_BpEEcxfgMuYPfTaIAOC1tCDurmsno7Sp.jpg';
+      return `<li class="gallery__item">
     <article class="gallery__article">
               <div class="gallery__thumb">
              
@@ -36,8 +39,9 @@ export const sectionedMarkup = (markupData) => {
                     </div>
                 </article>
              </li>`;
-  }).join('');
-  // console.log('markup', markup)
+    })
+    .join('');
+
   refs.newsGallery.innerHTML = '';
   refs.newsGallery.insertAdjacentHTML('afterbegin', markup);
 };

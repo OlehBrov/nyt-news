@@ -6,17 +6,31 @@ import { favoritesPageMarkup } from '../favoritesPage/favoriteNews';
 import { searchResultsMarkup } from '../indexPageJS/searchResultsMarkup';
 import { sectionedMarkup } from '../indexPageJS/sectionsMarkup';
 import { currentScreenWidth } from '../utils/screenWidthHandler';
+import { renderWeather } from '../weatherWidget.js/weatherWidgetMarkup';
+import { savedLocationWeather } from './getUserPosition';
+import { savedWeather } from './getUserPosition';
 
 const container = document.getElementById('tui-pagination-container');
 
 const options = {
   totalItems: 20,
-  itemsPerPage: 4,
+  itemsPerPage: 7,
   visiblePages: 4,
   page: 1,
   centerAlign: true,
   firstItemClassName: 'tui-first-child',
   lastItemClassName: 'tui-last-child',
+
+  getItemsPerPage() {
+    return this.itemsPerPage;
+  },
+
+  getTotal() {
+    return this.totalItems;
+  },
+  setItemsPerPage(numberOfItems) {
+    return (this.itemsPerPage = numberOfItems);
+  },
 };
 
 export const paginationInstance = new Pagination(container, options);
@@ -30,50 +44,91 @@ const newsData = {
   setKey(keyString) {
     this.key = keyString;
   },
+
+  getData() {
+    return this.data
+  },
+  getKey() {
+    return this.key
+  }
 };
+
 export const toPagination = async (renderMarkup, parentKey) => {
   newsData.setKey(parentKey);
   newsData.setData(renderMarkup);
+
   await paginationInstance.setTotalItems(renderMarkup.length);
-
-
-
-  options.totalItems = renderMarkup.length;
-  paginationInstance.reset();
 
   paginate();
 };
 export const paginate = async () => {
-  console.log('paginate fires')
-    if ((await currentScreenWidth.w) === 'mobile') {
-    options.itemsPerPage = 4;
-  }
-  if ((await currentScreenWidth.w) === 'tablet') {
-    options.itemsPerPage = 7;
-  }
-  if ((await currentScreenWidth.w) === 'desktop') {
-    options.itemsPerPage = 8;
-  }
   const currentPage = paginationInstance.getCurrentPage();
+  const findEndIdx = () => {
+    if (currentScreenWidth.w === 'mobile') {
+      let start = null;
+      let end = null;
+      paginationInstance.setItemsPerPage(4);
+      return {
+        start: 4 * currentPage - 4,
+        end: 4 * currentPage
+      };
+    }
+    if (currentScreenWidth.w === 'tablet') {
+      let start = null;
+      let end = null;
+      paginationInstance.setItemsPerPage(7);
+      return {
+        start: 7 * currentPage - 7,
+        end: 7 * currentPage
+      };;
+    }
+    if (currentScreenWidth.w === 'desktop') {
+      let start = null;
+      let end = null;
+      paginationInstance.setItemsPerPage(8);
+      return {
+        start: 8 * currentPage - 8,
+        end: 8 * currentPage
+      };
+    }
+  };
 
-  const startIdx = options.itemsPerPage * currentPage - options.itemsPerPage;
-  const endIdx = options.itemsPerPage * currentPage;
-  const markupPaginated = await newsData.data.slice(startIdx, endIdx);
+  const news = newsData.getData()
+  const newsKey = newsData.getKey()
+  const { start, end } = findEndIdx(); 
+  const markupPaginated = await news.slice(start, end);
 
-  if (newsData.key === 'top') dataRender(markupPaginated);
-  if (newsData.key === 'search') searchResultsMarkup(markupPaginated);
-  if (newsData.key === 'sections') {
+
+
+  if (newsKey === 'top') dataRender(markupPaginated);
+  if (newsKey === 'search') searchResultsMarkup(markupPaginated);
+  if (newsKey === 'sections') {
     sectionedMarkup(markupPaginated);
   }
-  if (newsData.key === 'favorites') {
+  if (newsKey === 'favorites') {
     favoritesPageMarkup(markupPaginated);
   }
 };
 
 paginationInstance.on('afterMove', event => {
-  const { page } = event.page;
+  const { page } = event;
   paginate();
-  if (page === Math.ceil(options.totalItems / options.itemsPerPage)) {
+  const totalItems = options.getTotal();
+  const perPage = options.getItemsPerPage();
+
+  if (page === Math.ceil(totalItems / perPage)) {
     return false;
   }
 });
+
+// paginationInstance.on('beforeMove', event => {
+//   const currentPage = event.page - 1;
+//   const totalItems = options.getTotal();
+//   const perPage = options.getItemsPerPage();
+//   console.log('currentPage', currentPage)
+//   console.log('Math.ceil(totalItems / perPage)', Math.ceil(totalItems / perPage))
+//   if (currentPage === Math.ceil(totalItems / perPage)) {
+//     return false;
+//     // return true;
+//   }
+// });

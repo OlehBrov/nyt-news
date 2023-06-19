@@ -14,6 +14,7 @@ import { sectionsHandler } from './js/indexPageJS/sectionsFilter';
 import { mqHandler } from './js/utils/mqHandler';
 import './js/localStorage/colorThemeHandler'
 import { setTheme } from './js/localStorage/colorThemeHandler';
+import { errorCallback, successCallback } from './js/services/getUserPosition';
 
 
 if (
@@ -32,21 +33,6 @@ if (window.location.pathname === '/read.html') {
   refs.container.classList.add('none');
   refs.categoriesList.classList.add('none');
 }
-window.onload = mqHandler;
-window.onload = setTheme;
-
-// window.addEventListener('resize', event => {
-//   console.log('event.currentTarget', event.currentTarget.innerWidth)
-//   if (window.matchMedia(screen.mobile)) {
-//     console.log('match mobile')
-//     currentView.veiw = 'mobile';
-//   }
-//   if (window.matchMedia(screen.tablet)) {
-//     currentView.veiw = 'tablet';
-//       console.log('match tablet')
-//   }
-//   if (window.matchMedia(screen.desktop)) {
-//     currentView.veiw = 'desktop';
-//       console.log('match desktop')
-//   }
-// });
+window.onload = mqHandler();
+window.onload = setTheme();
+navigator.geolocation.getCurrentPosition(successCallback, errorCallback);

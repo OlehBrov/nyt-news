@@ -1,38 +1,43 @@
 import { getNews } from '../services/fetch';
 import { refs } from '../refs/refs';
 import { checkboxHandler } from '../utils/checkboxHandler';
-import { paginationInstance } from '../services/pagination';
+// import { paginationInstance } from '../services/pagination';
 import { paginate } from '../services/pagination';
 import { toPagination } from '../services/pagination';
 import { getSections } from './sectionsFilter';
+import { currentScreenWidth } from '../utils/screenWidthHandler';
+import {
+  renderWeather,
+  weatherWidgetMarkup,
+} from '../weatherWidget.js/weatherWidgetMarkup';
+import { mqHandler } from '../utils/mqHandler';
+import {
+  savedLocationWeather,
+  savedWeather,
+} from '../services/getUserPosition';
 export const ICON_HEART = '/sprite.f14d31f7.svg#icon-heart';
 
 export const newsGalleryMarkup = async () => {
   const { results } = await getNews('/svc/mostpopular/v2/viewed/1.json');
   mainPageMarkup(results);
-  getSections()
+  getSections();
 };
 
 export const mainPageMarkup = async markupData => {
-  // paginationInstance.setTotalItems(markupData.length);
-  // paginationInstance.setItemsPerPage(5);
   await toPagination(markupData, 'top');
   paginate(markupData);
 };
 
 export const dataRender = async markupData => {
-// console.log('dataRender fires')
-  const renderMarkup = await markupData
-    .map(el => {
-      const publicDate = new Date(el.published_date);
-      const formattedDate = new Intl.DateTimeFormat('uk-UA').format(publicDate);
-      
-      const caption = el.media.length 
-        ? el.media[0].caption 
-        : 'Alt is not available';
-      
-      
-      return `<li class="gallery__item">
+  const renderMarkup = await markupData.map(el => {
+    const publicDate = new Date(el.published_date);
+    const formattedDate = new Intl.DateTimeFormat('uk-UA').format(publicDate);
+
+    const caption = el.media.length
+      ? el.media[0].caption
+      : 'Alt is not available';
+
+    return `<li class="gallery__item">
     <article class="gallery__article">
               <div class="gallery__thumb">
              
@@ -62,17 +67,44 @@ export const dataRender = async markupData => {
                     </div>
                 </article>
              </li>`;
-    })
-    .join('');
+  });
+  // .join('');
 
-  refs.newsGallery.innerHTML = '';
-  refs.newsGallery.insertAdjacentHTML('afterbegin', renderMarkup);
+  // mqHandler();
+  insertWeatherWidget(renderMarkup);
+  // refs.newsGallery.innerHTML = '';
+  // refs.newsGallery.insertAdjacentHTML('afterbegin', await finalMarkup);
 };
 
+export const insertWeatherWidget = async markup => {
+  // mqHandler();
+  await currentScreenWidth.w;
+  let weatherPosition = null;
+  if (currentScreenWidth.w === 'mobile') {
+    weatherPosition = 0;
+  }
+  if (currentScreenWidth.w === 'tablet') {
+    weatherPosition = 1;
+  }
+  if (currentScreenWidth.w === 'desktop') {
+    weatherPosition = 2;
+  }
+  markup.splice(weatherPosition, 0, weatherWidgetMarkup);
+  const weatherWidgetAddedMarkup = markup.join('');
+  // console.log('savedWeather', savedWeather)
+  refs.newsGallery.innerHTML = '';
+  refs.newsGallery.insertAdjacentHTML('afterbegin', weatherWidgetAddedMarkup);
+  // renderWeather(savedWeather)
+  if (savedWeather.current) {
+    savedLocationWeather(savedWeather);
+  }
+
+  console.log('weatherWidgetAddedMarkup');
+};
 // if (
 //   window.location.pathname === '/' ||
 //   window.location.pathname === '/index.html'
 // ) {
 //   refs.newsGallery.addEventListener('change', checkboxHandler);
 // }
- refs.newsGallery.addEventListener('change', checkboxHandler);
+refs.newsGallery.addEventListener('change', checkboxHandler);

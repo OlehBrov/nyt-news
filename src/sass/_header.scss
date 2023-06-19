@@ -157,6 +157,7 @@ body.darkMode {
   transition: transform 500ms linear;
 
   @include tablet {
+    position: relative;
     // border: 1px solid var(--text-color);
     // border-radius: 20px;
     // margin-top: 44px;
@@ -188,6 +189,8 @@ body.darkMode {
     padding-left: 48px;
     background: none;
     @include tablet {
+      margin-left: 32px;
+      position: relative;
       font-weight: 400;
       font-size: 14px;
       line-height: 1.71;

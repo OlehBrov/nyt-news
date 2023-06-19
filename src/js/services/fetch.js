@@ -12,11 +12,23 @@ export const getNews = async (endpoint, searchParams) => {
         "q": searchParams,
       }
     })
-  console.log('data axios', data)
+
     return data;
   
   
 };
+const baseWeatherUrl = 'http://api.weatherapi.com/v1'
+const weatherApiKey='48f94cc678274f729db114640230906'
+export const getWeather = async ({longitude, latitude}) => {
+  const url = `${baseWeatherUrl}/current.json`
+  const { data } = await axios(url, {
+    params: {
+      'key': weatherApiKey,
+      'q': `${latitude},${longitude}`,
+    } 
+  });
+  return data;
+}
 
 // async function fetchNews(endpoint, queryParams = {}) {
 //   const queryString = Object.entries(queryParams)

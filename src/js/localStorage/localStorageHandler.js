@@ -15,17 +15,12 @@ if (window.location.pathname === '/read.html') {
 const readFromLS = localStorage.getItem('read-news')
   ? JSON.parse(localStorage.getItem('read-news'))
   : [];
-console.log('readFromLS on top', readFromLS);
+
 
 export async function toLS(e) {
-  console.log('e.target', e.target);
-  console.log('e.target', e.target.nodeName);
 
   if (e.target.nodeName === 'A') {
-    console.log(
-      'e.target.parentNode.parentNode.childNodes',
-      e.target.parentNode.parentNode.childNodes[1].childNodes[3].textContent
-    );
+
     const readObj = {
       alt: e.target.parentNode.parentNode.childNodes[1].children[1].alt,
       header: e.target.parentNode.parentNode.childNodes[3].textContent,
@@ -48,7 +43,7 @@ export async function favoritesToLS(e) {
     : [];
 
   if (e.target.checked) {
-    console.log('favoritesToLS checked');
+
     const favoriteObj = {
       title:
         e.target.parentNode.parentNode.parentNode.childNodes[3].textContent,
@@ -74,7 +69,7 @@ export async function favoritesToLS(e) {
       'favorite-news',
       JSON.stringify(favoritesFromLS)
     );
-    console.log('added to favorites');
+
   }
 
   if (!e.target.checked) {

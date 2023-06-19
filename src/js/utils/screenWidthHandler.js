@@ -5,5 +5,6 @@ export const currentScreenWidth = {
 };
 export const screenWidthHandler = size => {
   themeSwitcherPosition(size);
+
   return (currentScreenWidth.w = size);
 };

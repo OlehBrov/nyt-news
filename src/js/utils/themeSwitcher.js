@@ -10,8 +10,8 @@ export const themeSwitcherPosition = screen => {
   }
 };
 
-const handleThemeSwitcher = e => {
-  if (e.target.checked) {
+export const handleThemeSwitcher = ({target}) => {
+  if (target.checked) {
       refs.body.classList.add('darkMode');
       themeToLocalStorage('dark')
   } else {

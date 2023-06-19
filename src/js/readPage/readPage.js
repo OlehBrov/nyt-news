@@ -9,7 +9,7 @@ export const readPageMarkup = readNews => {
   const folders = readDates.filter((el, index, array) => {
     return array.indexOf(el) === index;
   });
-  console.log('folders', folders);
+
 
   const dailyFoldersMarkup = folders
     .map((el, index) => {
@@ -24,11 +24,10 @@ export const readPageMarkup = readNews => {
 
 export const dailyPageMarkup = readNewsforDay => {
   dailyItem.forEach((day, index) => {
-    console.log('day', day)
+   
     const singleDayMarkup = readNewsforDay
       .map(el => {
-        // console.log('el', el)
-        // console.log('day', day.parentNode.firstElementChild.innerText)
+
         if (day.parentNode.firstElementChild.innerText === el.readDate) {
           return `<li class="gallery__item">
     <article class="gallery__article">
@@ -73,7 +72,7 @@ const collapseHandler = e => {
   
   const list = e.target.nextSibling;
   list.classList.toggle('collapsed');
-  console.log('list', list)
+
  
   if (list.style.maxHeight) {
     list.style.maxHeight = null;
