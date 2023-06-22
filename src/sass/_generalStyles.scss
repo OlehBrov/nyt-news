@@ -1,27 +1,27 @@
 @import './utils/resize';
 :root {
-    --bg-color: #f4f4f4;
-    --text-color: #111321; // all text
-    --color-btn-favorite: #111321;
-    --white-color: #ffffff;
-    --accent-color: #4440f6;
-    --gray-color: #a8a8a8; // date
-    --footer-color: #7a7a7a;
+  --bg-color: #f4f4f4;
+  --text-color: #111321; // all text
+  --color-btn-favorite: #111321;
+  --white-color: #ffffff;
+  --accent-color: #4440f6;
+  --gray-color: #a8a8a8; // date
+  --footer-color: #7a7a7a;
+  // switcher colors
+  --switcher-gray-moon: #5f6775;
+  // --switcher-accent: #4b48db;
+  --switcher-accent-day: #4b48db;
+
+  // DarkMode
+  body.darkMode {
+    --bg-color: #2e2e2e;
+    --text-color: #f4f4f4;
     // switcher colors
-    --switcher-gray-moon: #5f6775;
-    // --switcher-accent: #4b48db;
-    --switcher-accent-day: #4b48db;
+    // --switcher-gray: #f4f4f4;
+    --switcher-accent-day: #f4f4f4;
 
-    // DarkMode
-    body.darkMode {
-        --bg-color: #2e2e2e;
-        --text-color: #f4f4f4;
-        // switcher colors
-        // --switcher-gray: #f4f4f4;
-        --switcher-accent-day: #f4f4f4;
-
-        --switcher-gray-moon: #4440f6;
-    }
+    --switcher-gray-moon: #4440f6;
+  }
 }
 
 .container {
@@ -30,57 +30,40 @@
   margin: 0 auto;
   padding-left: 16px;
   padding-right: 16px;
-padding-bottom: 150px;
-  @include tablet{
-max-width: 768px;
+  padding-bottom: 150px;
+  @include tablet {
+    max-width: 768px;
   }
 
-@include desktop{
-max-width: 1280px;
-}
-
+  @include desktop {
+    max-width: 1280px;
+  }
 }
 
 body {
-    font-family: 'Manrope', sans-serif;
-    font-size: 14px;
-    line-height: 150%;
-    font-style: normal;
-    font-weight: 400;
-    color: var(--text-color);
-    background-color: var(--white-color);
-    &.darkMode{
-        background-color: #2e2e2e;
-    }
+  font-family: 'Manrope', sans-serif;
+  font-size: 14px;
+  line-height: 150%;
+  font-style: normal;
+  font-weight: 400;
+  color: var(--text-color);
+  background-color: var(--white-color);
+  &.darkMode {
+    background-color: #2e2e2e;
+  }
 }
 
 button {
-    cursor: pointer;
-    font-family: inherit;
-    padding: 0;
+  cursor: pointer;
+  font-family: inherit;
+  padding: 0;
 }
 
-ul {
-    list-style: none;
-}
-
-a {
-    text-decoration: none;
-}
-
-h1,
-h2,
-h3,
-ul,
-p {
-    padding: 0;
-    margin: 0;
-}
 
 img {
-    display: block;
-    max-width: 100%;
-    height: auto;
+  display: block;
+  max-width: 100%;
+  height: auto;
 }
 
 h1,
@@ -88,65 +71,60 @@ h2,
 h3,
 h4,
 p {
-    margin-top: 0;
-    margin-bottom: 0;
+  margin: 0;
+  padding: 0;
 }
 
 ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
 }
 
 ol {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
 }
 
 a {
-    text-decoration: none;
-    color: inherit;
-    //   cursor: url(../../images/cursor-hand.svg), pointer;
+  text-decoration: none;
+  color: inherit;
+  //   cursor: url(../../images/cursor-hand.svg), pointer;
 }
 
-img {
-    width: 100%;
-    display: block;
-}
 
 address {
-    font-style: inherit;
+  font-style: inherit;
 }
 
 button {
-    border: none;
-    padding: 0;
-    margin: 0;
-    font-family: inherit;
-    //   cursor: url(../../images/cursor-hand.svg), pointer;
-    background-color: inherit;
-    box-shadow: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font-family: inherit;
+  //   cursor: url(../../images/cursor-hand.svg), pointer;
+  background-color: inherit;
+  box-shadow: none;
 }
 
 // svg {
 //     fill: currentColor;
 // }
 
-
-.checkbox_toFavorite{
-    position: absolute;
-    bottom: 12;
-    right: 8;
-// display: none;
-&:checked{
+.checkbox_toFavorite {
+  position: absolute;
+  bottom: 12;
+  right: 8;
+  // display: none;
+  &:checked {
     content: 'Remove from favorites';
     .checkmark {
-            fill: #4440f6;
-        }
-}
+      fill: #4440f6;
+    }
+  }
 }
 
-.none{
-    display: none;
+.none {
+  display: none;
 }

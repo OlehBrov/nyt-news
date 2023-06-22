@@ -6,7 +6,7 @@ export const getSections = async () => {
   const { results } = await getNews('/svc/news/v3/content/section-list.json');
 
   const selectionHeader = {
-    display_name: 'Categories',
+    display_name: 'Others',
     section: 'all',
   };
   const onPageFilters = results.splice(0, 6);
@@ -32,7 +32,7 @@ ${onPageFilters
     })
     .join('');
   const sectionsFormMurkup = `
-    <a href="#" class="sections_toggle-btn">${selectionHeader.display_name}</a>
+    <a href="#" class="sections_toggle-btn">${selectionHeader.display_name}<span class="sections_btn-arrow">></span></a>
     <div class="sections_wrap">
 ${sectionsMarkup}
 </div>  
@@ -58,16 +58,19 @@ const categoriesMenuToggler = e => {
   if (e.target.nodeName !== 'A') return;
 
   e.target.parentNode.lastElementChild.classList.toggle('sections_wrap-open');
+  e.target.parentNode.childNodes[3].classList.toggle('sections-is-open');
+  e.target.parentNode.childNodes[3].lastElementChild.classList.toggle(
+    'arrow-sections-is-open'
+  );
 };
 
 if (
   window.location.pathname === '/' ||
   window.location.pathname === '/index.html'
 ) {
-refs.categoriesList.addEventListener('check', sectionsHandler);
-refs.categoriesList.addEventListener('click', categoriesMenuToggler);
+  refs.categoriesList.addEventListener('check', sectionsHandler);
+  refs.categoriesList.addEventListener('click', categoriesMenuToggler);
 }
-
 
 //https://api.nytimes.com/svc/news/v3/content/{source}/{section}.json
 
