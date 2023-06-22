@@ -1,19 +1,21 @@
 .dailyFolder {
   position: relative;
   // overflow: hidden;
+ 
 }
 
 .read_gallery__list {
   display: flex;
   flex-direction: column;
   gap: 30px;
+  margin-top: 40px;
   // position: absolute;
   // top: 20;
   // left: 0;
-  transition: transform 500ms ease-in-out 500ms, max-height 500ms ease-out 500ms;
+  transition: transform 500ms, max-height 500ms ease-out 10ms;
   // transition: max-height 0.2s ease-out;
   transform: translateY(0);
-  //visibility 500ms ease-in-out 500ms
+  
   overflow: hidden;
   max-height: 0;
   // transition: max-height 0.2s ease-out;
@@ -34,9 +36,15 @@
 .news-gallery_list-item {
   display: block;
   max-height: fit-content;
+  width: 100%;
 }
 
 .dailyFolder {
   display: block;
   max-height: fit-content;
+}
+.folderDate{
+  padding-bottom: 12px;
+  border-bottom: 1px solid #929292;
+   
 }

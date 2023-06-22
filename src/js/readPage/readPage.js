@@ -29,6 +29,7 @@ export const dailyPageMarkup = readNewsforDay => {
       .map(el => {
 
         if (day.parentNode.firstElementChild.innerText === el.readDate) {
+   
           return `<li class="gallery__item">
     <article class="gallery__article">
               <div class="gallery__thumb"> 
@@ -61,7 +62,7 @@ export const dailyPageMarkup = readNewsforDay => {
       .join('');
 
     dailyItem[index].insertAdjacentHTML(
-      'beforeend',
+      'afterbegin',
       singleDayMarkup
     );
   });

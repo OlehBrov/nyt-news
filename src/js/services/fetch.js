@@ -3,6 +3,10 @@ import axios from 'axios';
 const baseUrl = 'https://api.nytimes.com';
 const apiKey = 'TSw2QdOoFucel7ybh9h7kC4obHmkxxGl';
 
+const lastQuery = {
+  query: ''
+}
+
 export const getNews = async (endpoint, searchParams) => {
   const url = `${baseUrl}${endpoint}`;
   
@@ -12,11 +16,27 @@ export const getNews = async (endpoint, searchParams) => {
         "q": searchParams,
       }
     })
-
+  lastQuery.query = searchParams;
+  console.log('lastQuery', lastQuery.query)
     return data;
   
   
 };
+
+export const reFetchByDate = async (endpoint, dateFilter) => {
+  const url = `${baseUrl}${endpoint}`;
+  if (lastQuery.query === '') return;
+    const { data } = await axios(url, {
+      params: {
+        "api-key": apiKey,
+        "q": lastQuery.query,
+        'fq': dateFilter
+      }
+    })
+
+    return data;
+  
+}
 const baseWeatherUrl = 'http://api.weatherapi.com/v1'
 const weatherApiKey='48f94cc678274f729db114640230906'
 export const getWeather = async ({longitude, latitude}) => {

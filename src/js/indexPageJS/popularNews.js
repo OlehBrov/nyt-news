@@ -20,12 +20,16 @@ export const ICON_HEART = '/sprite.f14d31f7.svg#icon-heart';
 export const newsGalleryMarkup = async () => {
   const { results } = await getNews('/svc/mostpopular/v2/viewed/1.json');
   mainPageMarkup(results);
-  getSections();
+  if (
+    window.location.pathname === '/' ||
+    window.location.pathname === '/index.html'
+  ) {
+    getSections();
+  }
 };
 
 export const mainPageMarkup = async markupData => {
   await toPagination(markupData, 'top');
-  paginate(markupData);
 };
 
 export const dataRender = async markupData => {
@@ -43,7 +47,7 @@ export const dataRender = async markupData => {
              
               <label class="checkbox_toFavorite-container"> Add to Favorite 
                     <input type="checkbox" name="isFavorite" class="favorite_checkbox" />
-                      <svg width='16' height='16'><use class="checkmark" href="${ICON_HEART}"></use>
+                      <svg width='16' height='16' class="fav_swg_wrap"><use class="checkmark" href="${ICON_HEART}"></use>
                     </svg>
               </label>
                   

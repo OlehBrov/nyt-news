@@ -9,12 +9,14 @@ import { refs } from './js/refs/refs';
 import { newsGalleryMarkup } from './js/indexPageJS/popularNews';
 import { checkFavorites } from './js/favoritesPage/checkIsFavorites';
 import { checkRead } from './js/readPage/checkRead';
-// import './js/services/pagination'
+
 import { sectionsHandler } from './js/indexPageJS/sectionsFilter';
 import { mqHandler } from './js/utils/mqHandler';
 import './js/localStorage/colorThemeHandler'
 import { setTheme } from './js/localStorage/colorThemeHandler';
 import { errorCallback, successCallback } from './js/services/getUserPosition';
+import { picker } from './js/utils/datePicker';
+
 
 
 if (
@@ -31,7 +33,8 @@ if (window.location.pathname === '/favorite.html') {
 if (window.location.pathname === '/read.html') {
   checkRead();
   refs.container.classList.add('none');
-  refs.categoriesList.classList.add('none');
+  refs.sectionsContainer.classList.add('none');
+  // refs.calendarContainer.classList.add('calendar_none')
 }
 window.onload = mqHandler();
 window.onload = setTheme();

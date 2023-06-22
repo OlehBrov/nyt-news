@@ -13,6 +13,12 @@ export const refs = {
     readMoreLink: document.querySelector('.gallery__link'),
     categoriesList: document.querySelector('.sections-list'),
 
+    //Categories selector
+    sectionsContainer: document.querySelector('.sections-container'),
+    sectionsWrap: document.querySelector('.sections_wrap'),
+    sectionsList: document.querySelector('.sections-list'),
+    sectionLabel: document.querySelectorAll('.section_label'),
+
     //Favorites page
     favoritesGallery: document.querySelector('.favorites_gallery-list'),
 
@@ -25,7 +31,13 @@ export const refs = {
     //Theme switcher
     themeSlider: document.querySelector('.switch-checkbox'),
     themeSwitcher: document.querySelector('.theme'),
-    body: document.querySelector('body')
+    body: document.querySelector('body'),
+
+    //Calendar
+    calendarContainer: document.querySelector('.calendar'),
+    calendarPicIcon: document.querySelector('.calendar_icon'),
+    calendarToggleIcon: document.querySelector('.calendar_btn'),
+    dateInput: document.querySelector('.date_picker-input'),
     
 }
 

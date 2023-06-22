@@ -1,4 +1,4 @@
-import { createPaginationInstance, paginate } from "../services/pagination";
+import { paginate } from "../services/pagination";
 import { renderWeather } from "../weatherWidget.js/weatherWidgetMarkup";
 import { screenWidthHandler } from "./screenWidthHandler";
 

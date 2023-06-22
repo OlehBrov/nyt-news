@@ -33,7 +33,7 @@ const options = {
   },
 };
 
-export const paginationInstance = new Pagination(container, options);
+const paginationInstance = new Pagination(container, options);
 const newsData = {
   data: [],
   key: '',
@@ -61,12 +61,13 @@ export const toPagination = async (renderMarkup, parentKey) => {
 
   paginate();
 };
+
+
 export const paginate = async () => {
   const currentPage = paginationInstance.getCurrentPage();
   const findEndIdx = () => {
     if (currentScreenWidth.w === 'mobile') {
-      let start = null;
-      let end = null;
+
       paginationInstance.setItemsPerPage(4);
       return {
         start: 4 * currentPage - 4,
@@ -74,8 +75,7 @@ export const paginate = async () => {
       };
     }
     if (currentScreenWidth.w === 'tablet') {
-      let start = null;
-      let end = null;
+    
       paginationInstance.setItemsPerPage(7);
       return {
         start: 7 * currentPage - 7,
@@ -83,8 +83,7 @@ export const paginate = async () => {
       };;
     }
     if (currentScreenWidth.w === 'desktop') {
-      let start = null;
-      let end = null;
+   
       paginationInstance.setItemsPerPage(8);
       return {
         start: 8 * currentPage - 8,
@@ -93,13 +92,14 @@ export const paginate = async () => {
     }
   };
 
+  // Slice data
   const news = newsData.getData()
   const newsKey = newsData.getKey()
   const { start, end } = findEndIdx(); 
   const markupPaginated = await news.slice(start, end);
 
 
-
+//Send slised data to markup
   if (newsKey === 'top') dataRender(markupPaginated);
   if (newsKey === 'search') searchResultsMarkup(markupPaginated);
   if (newsKey === 'sections') {

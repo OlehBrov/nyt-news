@@ -39,12 +39,14 @@ body.darkMode {
   display: flex;
   min-height: 81px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  margin-bottom: 28px;
 }
 
 .header-container {
   display: flex;
   width: 100%;
   align-items: center;
+  padding-bottom: 0;
 
   //   &-tablet,
   //   &-desktop {

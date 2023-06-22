@@ -20,7 +20,7 @@ const readFromLS = localStorage.getItem('read-news')
 export async function toLS(e) {
 
   if (e.target.nodeName === 'A') {
-
+console.log('e.target.parentNode.parentNode.parentNode.lastElementChild', e.target.parentNode.parentNode.parentNode.lastElementChild.lastElementChild.firstElementChild.textContent)
     const readObj = {
       alt: e.target.parentNode.parentNode.childNodes[1].children[1].alt,
       header: e.target.parentNode.parentNode.childNodes[3].textContent,
@@ -29,6 +29,7 @@ export async function toLS(e) {
       text: e.target.parentNode.parentNode.childNodes[5].textContent,
       source:
         e.target.parentNode.parentNode.childNodes[7].lastElementChild.href,
+      date: e.target.parentNode.parentNode.parentNode.lastElementChild.lastElementChild.firstElementChild.textContent,
       readDate: getUserTime(),
     };
    
