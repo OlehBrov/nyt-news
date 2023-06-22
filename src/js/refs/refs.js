@@ -16,7 +16,6 @@ export const refs = {
     //Categories selector
     sectionsContainer: document.querySelector('.sections-container'),
     sectionsWrap: document.querySelector('.sections_wrap'),
-    sectionsList: document.querySelector('.sections-list'),
     sectionLabel: document.querySelectorAll('.section_label'),
     sectionsBtnArrow: document.querySelector('.sections_btn-arrow'),
 

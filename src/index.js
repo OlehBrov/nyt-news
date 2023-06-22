@@ -15,7 +15,7 @@ import { mqHandler } from './js/utils/mqHandler';
 import './js/localStorage/colorThemeHandler'
 import { setTheme } from './js/localStorage/colorThemeHandler';
 import { errorCallback, successCallback } from './js/services/getUserPosition';
-import { picker } from './js/utils/datePicker';
+
 
 
 
@@ -33,7 +33,7 @@ if (window.location.pathname === '/favorite.html') {
 if (window.location.pathname === '/read.html') {
   checkRead();
   refs.container.classList.add('none');
-  refs.sectionsContainer.classList.add('none');
+  // refs.sectionsContainer.classList.add('none');
   // refs.calendarContainer.classList.add('calendar_none')
 }
 window.onload = mqHandler();

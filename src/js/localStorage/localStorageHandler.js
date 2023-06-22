@@ -20,7 +20,6 @@ const readFromLS = localStorage.getItem('read-news')
 export async function toLS(e) {
 
   if (e.target.nodeName === 'A') {
-console.log('e.target.parentNode.parentNode.parentNode.lastElementChild', e.target.parentNode.parentNode.parentNode.lastElementChild.lastElementChild.firstElementChild.textContent)
     const readObj = {
       alt: e.target.parentNode.parentNode.childNodes[1].children[1].alt,
       header: e.target.parentNode.parentNode.childNodes[3].textContent,
@@ -125,3 +124,9 @@ const saveReadtoLS = (newsArray, newsObj) => {
 //     return el.src === src;
 //   }));
 // }
+export async function saveFiltersToLocalStorage(data) {
+  localStorage.setItem('filters', JSON.stringify(data));
+}
+export async function getFiltersFromLocalStorage() {
+ return JSON.parse(localStorage.getItem('filters'))
+}

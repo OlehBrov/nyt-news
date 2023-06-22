@@ -1,19 +1,46 @@
+import {
+  getFiltersFromLocalStorage,
+  saveFiltersToLocalStorage,
+} from '../localStorage/localStorageHandler';
 import { refs } from '../refs/refs';
 import { getNews } from '../services/fetch';
 import { toPagination } from '../services/pagination';
+import { currentScreenWidth } from '../utils/screenWidthHandler';
 
 export const getSections = async () => {
-  const { results } = await getNews('/svc/news/v3/content/section-list.json');
-
+  console.log('getSections fire');
+  const filters = {
+    sectionFilters: [],
+  };
+  const data = await getNews('/svc/news/v3/content/section-list.json');
+  if (data) {
+    filters.sectionFilters = await data.results;
+    saveFiltersToLocalStorage(data.results);
+  }
+  if (!data) {
+    filters.sectionFilters = await getFiltersFromLocalStorage();
+    console.log('filters from local', filters);
+  }
   const selectionHeader = {
     display_name: 'Others',
     section: 'all',
   };
-  const onPageFilters = results.splice(0, 6);
+  const devidedResults = {
+    onPageFilters: [],
+    onDropdownFilters: [],
+  };
+  if (currentScreenWidth.w === 'tablet') {
+    devidedResults.onPageFilters = await filters.sectionFilters.splice(0, 4);
+    devidedResults.onDropdownFilters = await filters.sectionFilters.splice(4);
+  }
+  if (currentScreenWidth.w === 'desktop') {
+    devidedResults.onPageFilters = await filters.sectionFilters.splice(0, 6);
+    devidedResults.onDropdownFilters = await filters.sectionFilters.splice(6);
+  }
 
   const visibleFiltersMarlup = `<form class="sections_form">
 <ul class="visible_categories_list">
-${onPageFilters
+${devidedResults.onPageFilters
   .map(el => {
     return `
   <li class="visible_categories_item"><input class="radio_input" type="radio" id="${el.section}" name="categorie" value="${el.section}">
@@ -23,7 +50,7 @@ ${onPageFilters
   .join('')}
 </ul>
   `;
-  const sectionsMarkup = results
+  const sectionsMarkup = devidedResults.onDropdownFilters
     .map(el => {
       return `
         <input class="radio_input" type="radio" id="${el.section}" name="categorie" value="${el.section}">
@@ -41,8 +68,8 @@ ${sectionsMarkup}
 `;
 
   const joinedMarkup = `${visibleFiltersMarlup}${sectionsFormMurkup}`;
+  refs.categoriesList.innerHTML = '';
   refs.categoriesList.insertAdjacentHTML('afterbegin', joinedMarkup);
-  console.log('width', refs.sectionsList.offsetWidth);
 };
 
 export const sectionsHandler = async e => {
@@ -71,16 +98,3 @@ if (
   refs.categoriesList.addEventListener('check', sectionsHandler);
   refs.categoriesList.addEventListener('click', categoriesMenuToggler);
 }
-
-//https://api.nytimes.com/svc/news/v3/content/{source}/{section}.json
-
-// `<form>
-//   <fieldset>
-//     <legend>${el.display_name}</legend>
-
-//     <input type="radio" id="${el.section}" name="monster" value="${el.section}">
-//     <label for="${el.section}">${el.display_name}</label>
-
-//   </fieldset>
-// </form>
-// `;

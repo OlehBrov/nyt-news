@@ -7,7 +7,6 @@ import { toPagination } from '../services/pagination';
 const selector = document.querySelector('#date_picker');
 const endpoint = '/svc/search/v2/articlesearch.json';
 
-
 const calendarOptions = {
   formatter: (input, date, instance) => {
     const value = date.toLocaleDateString();
@@ -42,13 +41,17 @@ const calendarOptions = {
     refs.dateInput.classList.remove('calendar-is-open');
   },
 };
-export const picker = datepicker(selector, calendarOptions);
 
-refs.calendarToggleIcon.addEventListener('click', e => {
+if (
+  window.location.pathname === '/' ||
+  window.location.pathname === '/index.html'
+) {
+  const picker = datepicker(selector, calendarOptions);
+
+  refs.calendarToggleIcon.addEventListener('click', e => {
     e.stopPropagation();
 
     const isHidden = picker.calendarContainer.classList.contains('qs-hidden');
     picker[isHidden ? 'show' : 'hide']();
   });
-
-
+}

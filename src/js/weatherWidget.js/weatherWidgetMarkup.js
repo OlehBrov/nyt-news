@@ -7,7 +7,7 @@ export const renderWeather = async weatherData => {
     weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' 
   }
   const wData = await weatherData;
-  // console.log('wData', wData);
+ 
   const weatherContainer = await document.querySelector('.weather');
   const [date, time] = wData.location.localtime.split(" ")
   const newDate = new Date(date)
@@ -29,13 +29,13 @@ export const renderWeather = async weatherData => {
     <p class="weather_character alighn">${month}, ${year}</p>
             <button type="button" class="weather_week-btn">weather for week</button>
     `;
-  console.log('weatherContainer', weatherContainer);
+
   if (weatherContainer !== null) {
     weatherContainer.innerHTML = '';
     weatherContainer.insertAdjacentHTML('afterbegin', weatherMarkup);
   }
 
-  console.log('end');
+
 };
 
 /* 

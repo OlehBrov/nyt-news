@@ -1,54 +1,58 @@
 import axios from 'axios';
+import { getFiltersFromLocalStorage } from '../localStorage/localStorageHandler';
 
 const baseUrl = 'https://api.nytimes.com';
 const apiKey = 'TSw2QdOoFucel7ybh9h7kC4obHmkxxGl';
 
 const lastQuery = {
-  query: ''
-}
+  query: '',
+};
 
 export const getNews = async (endpoint, searchParams) => {
   const url = `${baseUrl}${endpoint}`;
-  
-    const { data } = await axios(url, {
-      params: {
-        "api-key": apiKey,
-        "q": searchParams,
-      }
-    })
+
+  const { data } = await axios(url, {
+    params: {
+      'api-key': apiKey,
+      q: searchParams,
+    },
+  }).catch(error => {
+    console.log(error);
+    if (error.config.url === url) {
+      console.log('error', error);
+      return error;
+    }
+  });
   lastQuery.query = searchParams;
-  console.log('lastQuery', lastQuery.query)
-    return data;
-  
-  
+
+  return data;
 };
 
 export const reFetchByDate = async (endpoint, dateFilter) => {
   const url = `${baseUrl}${endpoint}`;
   if (lastQuery.query === '') return;
-    const { data } = await axios(url, {
-      params: {
-        "api-key": apiKey,
-        "q": lastQuery.query,
-        'fq': dateFilter
-      }
-    })
-
-    return data;
-  
-}
-const baseWeatherUrl = 'http://api.weatherapi.com/v1'
-const weatherApiKey='48f94cc678274f729db114640230906'
-export const getWeather = async ({longitude, latitude}) => {
-  const url = `${baseWeatherUrl}/current.json`
   const { data } = await axios(url, {
     params: {
-      'key': weatherApiKey,
-      'q': `${latitude},${longitude}`,
-    } 
+      'api-key': apiKey,
+      q: lastQuery.query,
+      fq: dateFilter,
+    },
+  });
+
+  return data;
+};
+const baseWeatherUrl = 'http://api.weatherapi.com/v1';
+const weatherApiKey = '48f94cc678274f729db114640230906';
+export const getWeather = async ({ longitude, latitude }) => {
+  const url = `${baseWeatherUrl}/current.json`;
+  const { data } = await axios(url, {
+    params: {
+      key: weatherApiKey,
+      q: `${latitude},${longitude}`,
+    },
   });
   return data;
-}
+};
 
 // async function fetchNews(endpoint, queryParams = {}) {
 //   const queryString = Object.entries(queryParams)

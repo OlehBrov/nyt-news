@@ -10,7 +10,7 @@ import {
   renderWeather,
   weatherWidgetMarkup,
 } from '../weatherWidget.js/weatherWidgetMarkup';
-import { mqHandler } from '../utils/mqHandler';
+import { dynamicMarkup, mqHandler } from '../utils/mqHandler';
 import {
   savedLocationWeather,
   savedWeather,
@@ -24,7 +24,7 @@ export const newsGalleryMarkup = async () => {
     window.location.pathname === '/' ||
     window.location.pathname === '/index.html'
   ) {
-    getSections();
+    dynamicMarkup();
   }
 };
 
@@ -95,7 +95,7 @@ export const insertWeatherWidget = async markup => {
   }
   markup.splice(weatherPosition, 0, weatherWidgetMarkup);
   const weatherWidgetAddedMarkup = markup.join('');
-  // console.log('savedWeather', savedWeather)
+
   refs.newsGallery.innerHTML = '';
   refs.newsGallery.insertAdjacentHTML('afterbegin', weatherWidgetAddedMarkup);
   // renderWeather(savedWeather)
@@ -103,7 +103,7 @@ export const insertWeatherWidget = async markup => {
     savedLocationWeather(savedWeather);
   }
 
-  console.log('weatherWidgetAddedMarkup');
+
 };
 // if (
 //   window.location.pathname === '/' ||
