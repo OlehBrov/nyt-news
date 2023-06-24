@@ -41,7 +41,7 @@
 }
 .gallery__text,
 .gallery__header {
-  color: #111321;
+  color: var(--text-color);
   overflow: hidden;
   display: -webkit-box;
   -webkit-box-orient: vertical;

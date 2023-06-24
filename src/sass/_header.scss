@@ -96,14 +96,14 @@ body.darkMode {
 }
 .current-page {
   // background: #4440f6;
-  height: 44px;
+  // height: 44px;
   // width: 100%;
   background-color: var(--accent-color);
   // box-shadow: 0 0 0 100vmax var(--accent-color);
   // clip-path: inset(0 -100vmax);
-  color: #f4f4f4;
+  color: var(--bg-color);
   @include tablet {
-    color: #111321;
+    color: var(--text-color);
     background: none;
     padding-bottom: 8px;
     border-bottom: 1px solid var(--accent-color);
@@ -149,10 +149,13 @@ body.darkMode {
   position: relative;
   width: 100%;
   display: flex;
-  justify-content: end;
+  justify-content: center;
   height: 31px;
   padding-left: 20px;
   overflow: hidden;
+  @include tablet {
+    overflow: visible;
+  }
 }
 .openSearchFieldButton {
   position: absolute;
@@ -166,15 +169,17 @@ body.darkMode {
     display: none;
   }
 }
-@include mobile {
-  .seach_form-hide {
-    transform: translateX(100%);
+.search_form-hide {
+  transform: translateX(100%);
+
+  @include tablet {
+    transform: translateX(0);
   }
 }
 
 .form_search-field {
   //   outline: 1px dotted black;
-  position: absolute;
+  // position: absolute;
   top: 0;
   right: 0;
   margin-left: auto;
@@ -187,15 +192,17 @@ body.darkMode {
   @include tablet {
     position: relative;
     // border: 1px solid var(--text-color);
-    // border-radius: 20px;
+    border-radius: 20px;
     // margin-top: 44px;
     // margin-bottom: 31px;
-    // width: 213px;
+    width: 213px;
+    margin-left: 0;
   }
 
   @include desktop {
-    // margin: 0 auto;
-    // width: 288px;
+
+    width: 288px;
+ 
     // margin-top: 51px;
     // margin-bottom: 31px;
   }

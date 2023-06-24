@@ -23,7 +23,7 @@
 
 .visible_categories_item {
   padding: 7px 24px;
-
+  background: #f4f4f4;
   border: 1px solid #4b48db;
   border-radius: 20px;
 
@@ -85,6 +85,7 @@
   border: none;
   padding: 7px 24px;
   color: #4440f6;
+  background: #f4f4f4;
   border: 1px solid #4b48db;
   border-radius: 20px;
   margin-left: 16px;
@@ -122,7 +123,7 @@
     line-height: 25px;
     /* identical to box height */
 
-    color: #111321;
+    color: var(--text-color);
   }
 }
 .date_picker-input {
