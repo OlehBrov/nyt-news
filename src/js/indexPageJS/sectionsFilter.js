@@ -21,10 +21,13 @@ export const getSections = async () => {
     filters.sectionFilters = await getFiltersFromLocalStorage();
     console.log('filters from local', filters);
   }
-  const selectionHeader = {
-    display_name: 'Others',
-    section: 'all',
-  };
+
+  const selectionHeader =
+    currentScreenWidth.w === 'mobile' ? 'Categories' : 'Others';
+  // const selectionHeader = {
+  //   display_name: 'Others',
+  //   section: 'all',
+  // };
   const devidedResults = {
     onPageFilters: [],
     onDropdownFilters: [],
@@ -37,6 +40,22 @@ export const getSections = async () => {
     devidedResults.onPageFilters = await filters.sectionFilters.splice(0, 6);
     devidedResults.onDropdownFilters = await filters.sectionFilters.splice(6);
   }
+
+  const mobileViewFiltersMarkup = `
+<form class="sections_form">
+    <a href="#" class="sections_toggle-btn">Categories<span class="sections_btn-arrow">></span></a>
+    <div class="sections_wrap">
+${filters.sectionFilters
+  .map(el => {
+    return `
+   <input class="radio_input" type="radio" id="${el.section}" name="categorie" value="${el.section}">
+    <label class="section_label" for="${el.section}">${el.display_name}</label>
+  `;
+  })
+  .join('')}
+</div>  
+</form>
+  `;
 
   const visibleFiltersMarlup = `<form class="sections_form">
 <ul class="visible_categories_list">
@@ -58,8 +77,9 @@ ${devidedResults.onPageFilters
         `;
     })
     .join('');
+
   const sectionsFormMurkup = `
-    <a href="#" class="sections_toggle-btn">${selectionHeader.display_name}<span class="sections_btn-arrow">></span></a>
+    <a href="#" class="sections_toggle-btn">Others<span class="sections_btn-arrow">></span></a>
     <div class="sections_wrap">
 ${sectionsMarkup}
 </div>  
@@ -67,7 +87,10 @@ ${sectionsMarkup}
 </form>
 `;
 
-  const joinedMarkup = `${visibleFiltersMarlup}${sectionsFormMurkup}`;
+  const joinedMarkup =
+    currentScreenWidth.w === 'mobile'
+      ? mobileViewFiltersMarkup
+      : `${visibleFiltersMarlup}${sectionsFormMurkup}`;
   refs.categoriesList.innerHTML = '';
   refs.categoriesList.insertAdjacentHTML('afterbegin', joinedMarkup);
 };
@@ -85,10 +108,18 @@ const categoriesMenuToggler = e => {
   if (e.target.nodeName !== 'A') return;
 
   e.target.parentNode.lastElementChild.classList.toggle('sections_wrap-open');
-  e.target.parentNode.childNodes[3].classList.toggle('sections-is-open');
-  e.target.parentNode.childNodes[3].lastElementChild.classList.toggle(
-    'arrow-sections-is-open'
-  );
+
+  if (currentScreenWidth.w === 'mobile') {
+    e.target.parentNode.childNodes[1].lastElementChild.classList.toggle(
+      'arrow-sections-is-open'
+    );
+    e.target.parentNode.childNodes[1].classList.toggle('sections-is-open');
+  } else {
+    e.target.parentNode.childNodes[3].lastElementChild.classList.toggle(
+      'arrow-sections-is-open'
+    );
+    e.target.parentNode.childNodes[3].classList.toggle('sections-is-open');
+  }
 };
 
 if (

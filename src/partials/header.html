@@ -4,16 +4,16 @@
     <a href="./index.html" class="logo">News</a>
     <nav>
       <ul class="navbar">
-        <li class="navbar__item">
-          <a href="./index.html" class="navbar__link navbar__link--current"
+        <li class="navbar__item item_home">
+          <a href="./index.html" class="navbar__link"
             >Home</a
           >
         </li>
-        <li class="navbar__item">
-          <a href="./favorite.html" class="navbar__link">Favorite</a>
+        <li class="navbar__item item_favorites">
+          <a href="./favorite.html" class="navbar__link link_favorite">Favorite</a>
         </li>
-        <li class="navbar__item">
-          <a href="./read.html" class="navbar__link">Read</a>
+        <li class="navbar__item item_read">
+          <a href="./read.html" class="navbar__link link_read">Read</a>
         </li>
       </ul>
     </nav>
@@ -24,7 +24,7 @@
         </svg>
       </button>
 
-      <form name="search-form" class="form_search-field " id="form-field">
+      <form name="search-form" class="form_search-field seach_form-hide" id="form-field">
         <!-- seach_form-hide -->
         <input type="text" name="search_query" class="search_input" id="search-field__input" placeholder="Search" />
         <button type="submit" class="search-field__btn" form="form-field" id="form-btn" >
@@ -73,7 +73,7 @@
       </button>
     </div>
     <ul class="navbar-mobile__list">
-      <li class="navbar-mobile__item">
+      <li class="navbar-mobile__item item_home">
         <a
           href="./index.html"
           class="navbar-mobile__link navbar-mobile__link--current"
@@ -91,7 +91,7 @@
           </svg>
         </a>
       </li>
-      <li class="navbar-mobile__item">
+      <li class="navbar-mobile__item item_favorites">
         <a href="./favorite.html" class="navbar-mobile__link">
           <div class="navbar-mobile__icon-wrapper">
             <svg width="18" height="18" class="navbar-mobile__icon">
@@ -99,9 +99,12 @@
             </svg>
           </div>
           Favorite
+            <svg width="24" height="12" class="current-page__icon">
+              <use href="./images/sprite.svg#icon-Frame-down"></use>
+            </svg>
         </a>
       </li>
-      <li class="navbar-mobile__item">
+      <li class="navbar-mobile__item item_read">
         <a href="./read.html" class="navbar-mobile__link">
           <div class="navbar-mobile__icon-wrapper">
             <svg width="18" height="18" class="navbar-mobile__icon">
@@ -109,6 +112,9 @@
             </svg>
           </div>
           Read
+            <svg width="24" height="12" class="current-page__icon">
+              <use href="./images/sprite.svg#icon-Frame-down"></use>
+            </svg>
         </a>
       </li>
     </ul>

@@ -4,6 +4,7 @@ import { refs } from '../refs/refs';
 import { reFetchByDate } from '../services/fetch';
 import { toPagination } from '../services/pagination';
 
+
 const selector = document.querySelector('#date_picker');
 const endpoint = '/svc/search/v2/articlesearch.json';
 
@@ -41,17 +42,14 @@ const calendarOptions = {
     refs.dateInput.classList.remove('calendar-is-open');
   },
 };
-
-if (
-  window.location.pathname === '/' ||
-  window.location.pathname === '/index.html'
-) {
+if (selector) {
   const picker = datepicker(selector, calendarOptions);
-
   refs.calendarToggleIcon.addEventListener('click', e => {
-    e.stopPropagation();
+  e.stopPropagation();
 
-    const isHidden = picker.calendarContainer.classList.contains('qs-hidden');
-    picker[isHidden ? 'show' : 'hide']();
-  });
+  const isHidden = picker.calendarContainer.classList.contains('qs-hidden');
+  picker[isHidden ? 'show' : 'hide']();
+});
 }
+
+

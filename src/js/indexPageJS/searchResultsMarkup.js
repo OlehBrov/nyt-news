@@ -5,7 +5,7 @@ export const searchResultsMarkup = markupData => {
   
   const markup = markupData.map(el => {
     const publicDate = new Date(el.pub_date);
-    
+
     const formattedDate = new Intl.DateTimeFormat().format(publicDate);
     const caption = el.multimedia.length
       ? el.multimedia[0].caption
@@ -20,7 +20,7 @@ export const searchResultsMarkup = markupData => {
              
               <label class="checkbox_toFavorite-container"> Add to Favorite 
                     <input type="checkbox" name="isFavorite" class="favorite_checkbox" />
-                      <svg width='16' height='16'><use class="checkmark" href="${ICON_HEART}"></use>
+                      <svg width='16' height='16' class="fav_swg_wrap"><use class="checkmark" href="${ICON_HEART}"></use>
                     </svg>
               </label>
                   

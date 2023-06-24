@@ -7,28 +7,40 @@ export const sectionedMarkup = markupData => {
       const publicDate = new Date(el.created_date);
 
       const formattedDate = new Intl.DateTimeFormat().format(publicDate);
-
+    
+      const imageSet = el.multimedia.reduce(
+        (previousValue, currentValue, index, array) => {
+          return [
+            ...previousValue,
+            `${currentValue.url} ${currentValue.width}w`,
+          ];
+        },
+        []
+      );
+      // console.log('imgSet', imageSet)
       const caption = el.multimedia
         ? el.multimedia[0].caption
         : 'Alt is not available';
-      const imgSource =
-        el.multimedia && el.multimedia.length
-          ? `${el.multimedia[1].url}`
-          : 'https://t3.ftcdn.net/jpg/04/62/93/66/360_F_462936689_BpEEcxfgMuYPfTaIAOC1tCDurmsno7Sp.jpg';
+  
       return `<li class="gallery__item">
     <article class="gallery__article">
               <div class="gallery__thumb">
              
-              <label class="checkbox_toFavorite-container"> Add to Favorite 
+                           <label class="checkbox_toFavorite-container"> Add to Favorite 
                     <input type="checkbox" name="isFavorite" class="favorite_checkbox" />
-                      <svg width='16' height='16'><use class="checkmark" href="${ICON_HEART}"></use>
+                      <svg width='16' height='16' class="fav_swg_wrap"><use class="checkmark" href="${ICON_HEART}"></use>
                     </svg>
               </label>
                   
                    
               <p class="gallery__category">${el.section}</p>
-                <img class="gallery__img" src="${imgSource}" alt="${caption}"/>
-                         
+              
+                   <img
+                    srcset="${imageSet}"
+                    sizes="(min-width: 1280px) 400px, (min-width: 768px) 350px, 100vw"
+                    src="${el.multimedia[1].url}"
+                    alt="${caption}"
+/>      
                     </div>
                     <h3 class="gallery__header">${el.abstract}</h3>
                     
@@ -45,3 +57,5 @@ export const sectionedMarkup = markupData => {
   refs.newsGallery.innerHTML = '';
   refs.newsGallery.insertAdjacentHTML('afterbegin', markup);
 };
+
+// sizes="(min-width: 1280px) 400px, (min-width: 768px) 350px, (min-width: 300px) 280px, 100vw"

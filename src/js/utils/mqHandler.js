@@ -1,4 +1,5 @@
 import { getSections } from '../indexPageJS/sectionsFilter';
+import { moveThemeSwitcher } from '../services/moveThemeSwitcherPosition';
 import { paginate } from '../services/pagination';
 import { renderWeather } from '../weatherWidget.js/weatherWidgetMarkup';
 import { screenWidthHandler } from './screenWidthHandler';
@@ -16,7 +17,6 @@ const screen = {
 };
 
 for (let [scr, mq] of Object.entries(screen)) {
-  // console.log('first scr', scr)
   if (mq) mq.addEventListener('change', mqHandler);
 }
 export function mqHandler() {
@@ -25,27 +25,25 @@ export function mqHandler() {
   for (let [scr, mq] of Object.entries(screen)) {
     if (mq.matches) {
       currentScreen.screen = scr;
+
+      isFirstLoad && moveThemeSwitcher(scr);
     }
     if (!mq || mq.matches) {
-      // console.log('mq.matches', mq.matches)
       size = scr;
       screenWidthHandler(size);
       paginate();
     } else if (scr !== size) {
     }
   }
-  console.log('size before', size);
-  console.log('prevSize before', prevSize);
+
   if (prevSize !== size && !isFirstLoad) {
     dynamicMarkup();
+    moveThemeSwitcher(size);
     prevSize = size;
-    console.log('prevSize after', prevSize);
-    console.log('size after', size);
   }
 }
 
 export const dynamicMarkup = prevSize => {
-  console.log('dynamicMarkup fire');
   if (prevSize === null) return;
   isFirstLoad = false;
   getSections();

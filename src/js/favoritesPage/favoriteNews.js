@@ -14,11 +14,11 @@ export const favoritesPageMarkup = async favoriteNews => {
                     ? 'https://t3.ftcdn.net/jpg/04/62/93/66/360_F_462936689_BpEEcxfgMuYPfTaIAOC1tCDurmsno7Sp.jpg'
                     : el.img
                 }" alt="${el.alt}"/>
- <label class="checkbox_toFavorite-container"> Remove from favorites 
-                    <input type="checkbox" name="isFavorite" class="favorite_checkbox" checked/>
-                      <svg width='16' height='16'><use class="checkmark" href="${ICON_HEART}"></use>
+              <label class="checkbox_toFavorite-container"> Add to Favorite 
+                    <input type="checkbox" name="isFavorite" class="favorite_checkbox" />
+                      <svg width='16' height='16' class="fav_swg_wrap"><use class="checkmark" href="${ICON_HEART}"></use>
                     </svg>
-              </label>        
+              </label>
                     </div>
                     <h3 class="gallery__header">${el.title}</h3>
                     <p class="gallery__text">${el.description}</p>
