@@ -1,5 +1,6 @@
 import { refs } from '../refs/refs';
-export const ICON_HEART = '/sprite.f14d31f7.svg#icon-heart';
+import { ICON_HEART } from './popularNews';
+// export const ICON_HEART = '/sprite.f14d31f7.svg#icon-heart';
 
 export const searchResultsMarkup = markupData => {
   

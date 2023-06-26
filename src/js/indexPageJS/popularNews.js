@@ -15,6 +15,8 @@ import {
   savedLocationWeather,
   savedWeather,
 } from '../services/getUserPosition';
+
+// import { ICON_HEART } from '../../images/icons_heart.svg';
 export const ICON_HEART = '/sprite.f14d31f7.svg#icon-heart';
 
 export const newsGalleryMarkup = async () => {
