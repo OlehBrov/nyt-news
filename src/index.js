@@ -20,7 +20,9 @@ import { currentPageLinkStyler } from './js/utils/currentPageLinkStyler';
 
 if (
   window.location.pathname === '/' ||
-  window.location.pathname === '/index.html'
+  window.location.pathname === '/index.html' ||
+  window.location.pathname === '/nyt-news/' ||
+  window.location.pathname === '/nyt-news/index.html'
 ) {
   newsGalleryMarkup();
   refs.categoriesList.addEventListener('change', sectionsHandler);
