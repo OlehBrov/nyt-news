@@ -20,6 +20,7 @@ for (let [scr, mq] of Object.entries(screen)) {
   if (mq) mq.addEventListener('change', mqHandler);
 }
 export function mqHandler() {
+  console.log('mq handler run')
   let size = null;
   let prevSize = null;
   for (let [scr, mq] of Object.entries(screen)) {

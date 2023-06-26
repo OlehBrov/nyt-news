@@ -15,7 +15,7 @@ import { mqHandler } from './js/utils/mqHandler';
 import './js/localStorage/colorThemeHandler';
 import { setTheme } from './js/localStorage/colorThemeHandler';
 import { errorCallback, successCallback } from './js/services/getUserPosition';
-import { picker } from './js/utils/datePicker';
+
 import { currentPageLinkStyler } from './js/utils/currentPageLinkStyler';
 
 if (
@@ -29,11 +29,11 @@ if (
   currentPageLinkStyler('home');
 }
 
-if (window.location.pathname === '/favorite.html') {
+if (window.location.pathname === '/favorite.html' || window.location.pathname === '/nyt-news/favorite.html') {
   checkFavorites();
   currentPageLinkStyler('favorite');
 }
-if (window.location.pathname === '/read.html') {
+if (window.location.pathname === '/read.html' || window.location.pathname === '/nyt-news/read.html') {
   checkRead();
   refs.container.classList.add('none');
   currentPageLinkStyler('read');
