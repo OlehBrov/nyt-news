@@ -3,7 +3,7 @@ import { refs } from '../refs/refs';
 export const currentPageLinkStyler = page => {
   switch (page) {
     case 'home':
-      console.log('case home', page);
+
       refs.homeLink.forEach(link => {
         link.classList.add('current-page');
       });
@@ -15,7 +15,7 @@ export const currentPageLinkStyler = page => {
       });
       break;
     case 'favorite':
-      console.log('case favorite', page);
+
       refs.homeLink.forEach(link => {
         link.classList.remove('current-page');
       });
@@ -27,7 +27,7 @@ export const currentPageLinkStyler = page => {
       });
       break;
     case 'read':
-      console.log('case read', page);
+
       refs.homeLink.forEach(link => {
         link.classList.remove('current-page');
       });

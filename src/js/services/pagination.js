@@ -120,15 +120,3 @@ paginationInstance.on('afterMove', event => {
     return false;
   }
 });
-
-// paginationInstance.on('beforeMove', event => {
-//   const currentPage = event.page - 1;
-//   const totalItems = options.getTotal();
-//   const perPage = options.getItemsPerPage();
-//   console.log('currentPage', currentPage)
-//   console.log('Math.ceil(totalItems / perPage)', Math.ceil(totalItems / perPage))
-//   if (currentPage === Math.ceil(totalItems / perPage)) {
-//     return false;
-//     // return true;
-//   }
-// });
