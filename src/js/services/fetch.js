@@ -41,7 +41,7 @@ export const reFetchByDate = async (endpoint, dateFilter) => {
 
   return data;
 };
-const baseWeatherUrl = 'http://api.weatherapi.com/v1';
+const baseWeatherUrl = 'https://api.weatherapi.com/v1';
 const weatherApiKey = '48f94cc678274f729db114640230906';
 export const getWeather = async ({ longitude, latitude }) => {
   const url = `${baseWeatherUrl}/current.json`;
