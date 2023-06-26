@@ -17,7 +17,7 @@ export const sectionedMarkup = markupData => {
         },
         []
       );
-      // console.log('imgSet', imageSet)
+    
       const caption = el.multimedia
         ? el.multimedia[0].caption
         : 'Alt is not available';

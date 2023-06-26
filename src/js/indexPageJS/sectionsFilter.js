@@ -8,7 +8,7 @@ import { toPagination } from '../services/pagination';
 import { currentScreenWidth } from '../utils/screenWidthHandler';
 
 export const getSections = async () => {
-  console.log('getSections fire');
+
   const filters = {
     sectionFilters: [],
   };
@@ -19,7 +19,7 @@ export const getSections = async () => {
   }
   if (!data) {
     filters.sectionFilters = await getFiltersFromLocalStorage();
-    console.log('filters from local', filters);
+
   }
 
   const selectionHeader =
