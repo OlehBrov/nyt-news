@@ -124,7 +124,9 @@ const categoriesMenuToggler = e => {
 
 if (
   window.location.pathname === '/' ||
-  window.location.pathname === '/index.html'
+  window.location.pathname === '/index.html' ||
+  window.location.pathname === '/nyt-news/' ||
+  window.location.pathname === '/nyt-news/index.html'
 ) {
   refs.categoriesList.addEventListener('check', sectionsHandler);
   refs.categoriesList.addEventListener('click', categoriesMenuToggler);

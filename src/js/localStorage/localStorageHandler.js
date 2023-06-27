@@ -2,13 +2,16 @@ import { refs } from '../refs/refs';
 
 if (
   window.location.pathname === '/' ||
-  window.location.pathname === '/index.html'
+  window.location.pathname === '/index.html' ||
+  window.location.pathname === '/nyt-news/' ||
+  window.location.pathname === '/nyt-news/index.html'
 ) {
   refs.newsGallery.addEventListener('click', toLS);
   refs.newsGallery.addEventListener('click', favoritesToLS);
 }
 
-if (window.location.pathname === '/read.html') {
+if (window.location.pathname === '/read.html'||
+  window.location.pathname === '/nyt-news/read.html') {
   refs.newsGallery.addEventListener('click', favoritesToLS);
 }
 

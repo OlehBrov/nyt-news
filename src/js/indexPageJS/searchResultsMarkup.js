@@ -1,27 +1,27 @@
 import { refs } from '../refs/refs';
 import { ICON_HEART } from './popularNews';
 // export const ICON_HEART = '/sprite.f14d31f7.svg#icon-heart';
-
+import heartIcon from '../../images/icons_heart.svg';
 export const searchResultsMarkup = markupData => {
-  
-  const markup = markupData.map(el => {
-    const publicDate = new Date(el.pub_date);
+  const markup = markupData
+    .map(el => {
+      const publicDate = new Date(el.pub_date);
 
-    const formattedDate = new Intl.DateTimeFormat().format(publicDate);
-    const caption = el.multimedia.length
-      ? el.multimedia[0].caption
-      : 'Alt is not available';
-    const imgSource =
-      el.multimedia.length === 0
-        ? 'https://t3.ftcdn.net/jpg/04/62/93/66/360_F_462936689_BpEEcxfgMuYPfTaIAOC1tCDurmsno7Sp.jpg'
-        : `https://static01.nyt.com/${el.multimedia[0].url}`;
-    return `<li class="gallery__item">
+      const formattedDate = new Intl.DateTimeFormat().format(publicDate);
+      const caption = el.multimedia.length
+        ? el.multimedia[0].caption
+        : 'Alt is not available';
+      const imgSource =
+        el.multimedia.length === 0
+          ? 'https://t3.ftcdn.net/jpg/04/62/93/66/360_F_462936689_BpEEcxfgMuYPfTaIAOC1tCDurmsno7Sp.jpg'
+          : `https://static01.nyt.com/${el.multimedia[0].url}`;
+      return `<li class="gallery__item">
     <article class="gallery__article">
               <div class="gallery__thumb">
              
               <label class="checkbox_toFavorite-container"> Add to Favorite 
                     <input type="checkbox" name="isFavorite" class="favorite_checkbox" />
-                      <svg width='16' height='16' class="fav_swg_wrap"><use class="checkmark" href="${ICON_HEART}"></use>
+                      <svg width='16' height='16' class="fav_swg_wrap"><use class="checkmark" href="${heartIcon}"></use>
                     </svg>
               </label>
                   
@@ -39,7 +39,8 @@ export const searchResultsMarkup = markupData => {
                     </div>
                 </article>
              </li>`;
-  }).join('');
+    })
+    .join('');
 
   refs.newsGallery.innerHTML = '';
   refs.newsGallery.insertAdjacentHTML('afterbegin', markup);

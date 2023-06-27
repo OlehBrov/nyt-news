@@ -24,7 +24,9 @@ export const newsGalleryMarkup = async () => {
   mainPageMarkup(results);
   if (
     window.location.pathname === '/' ||
-    window.location.pathname === '/index.html'
+    window.location.pathname === '/index.html' ||
+  window.location.pathname === '/nyt-news/' ||
+  window.location.pathname === '/nyt-news/index.html'
   ) {
     dynamicMarkup();
   }
@@ -49,7 +51,7 @@ export const dataRender = async markupData => {
              
               <label class="checkbox_toFavorite-container"> Add to Favorite 
                     <input type="checkbox" name="isFavorite" class="favorite_checkbox" />
-                      <svg width='16' height='16' class="fav_swg_wrap"><use class="checkmark" href="${ICON_HEART}"></use>
+                      <svg width='16' height='16' class="fav_swg_wrap"><use class="checkmark" href="./images/icons_heart.svg"></use>
                     </svg>
               </label>
                   
