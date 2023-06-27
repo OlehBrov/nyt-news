@@ -12,12 +12,12 @@ export const getSections = async () => {
   const filters = {
     sectionFilters: [],
   };
-  const {data} = await getNews('/svc/news/v3/content/section-list.json');
-  if (data) {
-    filters.sectionFilters = await data.results;
-    saveFiltersToLocalStorage(data.results);
+  const response = await getNews('/svc/news/v3/content/section-list.json');
+  if (response) {
+    filters.sectionFilters = await response.data.results;
+    saveFiltersToLocalStorage(response.data.results);
   }
-  if (!data) {
+  if (!response) {
     filters.sectionFilters = await getFiltersFromLocalStorage();
 
   }
@@ -98,10 +98,10 @@ ${sectionsMarkup}
 export const sectionsHandler = async e => {
   const section = e.target.value;
 
-  const { results } = await getNews(`/svc/news/v3/content/all/${section}.json`);
+  const response= await getNews(`/svc/news/v3/content/all/${section}.json`);
 
   e.target.parentNode.classList.remove('sections_wrap-open');
-  toPagination(results, 'sections');
+  toPagination(response.data.results, 'sections');
 };
 
 const categoriesMenuToggler = e => {

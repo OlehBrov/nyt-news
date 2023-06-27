@@ -10,16 +10,17 @@ const searchFieldToggler = () => {
   refs.openSearchFieldButton.classList.add('openSearchFieldButton-hidden');
 };
 refs.openSearchFieldButton.addEventListener('click', searchFieldToggler);
+
 const searchHandler = async e => {
   e.preventDefault();
   const query = e.target.elements.search_query.value;
-  const { response } = await getNews(endpoint, query);
+  const results = await getNews(endpoint, query);
   if (currentScreen.w === 'mobile') {
     refs.searchForm.classList.add('search_form-hide');
     refs.openSearchFieldButton.classList.remove('openSearchFieldButton-hidden');
   }
 
-  toPagination(response.docs, 'search');
+  toPagination(results.data.response.docs, 'search');
   refs.searchInput.value = '';
   // e.target.elements.search_query
 };

@@ -117,7 +117,7 @@
   fill: none;
 }
 
-.checkbox_toFavorite-container input:checked ~ svg > .checkmark {
+.checkbox_toFavorite-container input:checked ~ svg  {
   fill: #4440f6;
 }
 .gallery__link{

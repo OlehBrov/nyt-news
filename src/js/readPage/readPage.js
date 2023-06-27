@@ -1,5 +1,5 @@
 import { refs } from '../refs/refs';
-import { ICON_HEART } from '../indexPageJS/popularNews';
+// import { ICON_HEART } from '../indexPageJS/popularNews';
 
 export const readPageMarkup = readNews => {
   const readDates = readNews.reduce((allDates, el) => {
@@ -19,12 +19,12 @@ export const readPageMarkup = readNews => {
   refs.newsGallery.insertAdjacentHTML('afterbegin', dailyFoldersMarkup);
   dailyItem = document.querySelectorAll('.read_gallery__list');
 
-  dailyPageMarkup(readNews);
+  dailyPageMarkup(readNews, dailyItem);
 };
 
-export const dailyPageMarkup = readNewsforDay => {
-  dailyItem.forEach((day, index) => {
-   
+export const dailyPageMarkup = (readNewsforDay, dailyContainer) => {
+  dailyContainer.forEach((day, index) => {
+   console.log('dailyItem', dailyContainer)
     const singleDayMarkup = readNewsforDay
       .map(el => {
 
@@ -35,7 +35,8 @@ export const dailyPageMarkup = readNewsforDay => {
               <div class="gallery__thumb"> 
                     <label class="checkbox_toFavorite-container"> Add to Favorite 
                     <input type="checkbox" name="isFavorite" class="favorite_checkbox" />
-                      <svg width='16' height='16'><use class="checkmark" href="${ICON_HEART}"></use>
+                      <svg width="16" height="16" class="fav_swg_wrap" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M4.66683 2C2.82616 2 1.3335 3.47733 1.3335 5.3C1.3335 6.77133 1.91683 10.2633 7.65883 13.7933C7.76168 13.8559 7.87976 13.889 8.00016 13.889C8.12056 13.889 8.23864 13.8559 8.3415 13.7933C14.0835 10.2633 14.6668 6.77133 14.6668 5.3C14.6668 3.47733 13.1742 2 11.3335 2C9.49283 2 8.00016 4 8.00016 4C8.00016 4 6.5075 2 4.66683 2Z" stroke="#4440F7" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
               </label>
               
@@ -61,7 +62,7 @@ export const dailyPageMarkup = readNewsforDay => {
       })
       .join('');
 
-    dailyItem[index].insertAdjacentHTML(
+    dailyContainer[index].insertAdjacentHTML(
       'afterbegin',
       singleDayMarkup
     );

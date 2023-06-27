@@ -38,6 +38,7 @@ export const refs = {
   body: document.querySelector('body'),
 
   //Calendar
+  pickerContainer: document.getElementById("date_picker"),
   calendarContainer: document.querySelector('.calendar'),
   calendarPicIcon: document.querySelector('.calendar_icon'),
   calendarToggleIcon: document.querySelector('.calendar_btn'),

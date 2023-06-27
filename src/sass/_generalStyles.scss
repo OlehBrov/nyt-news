@@ -108,21 +108,11 @@ button {
   box-shadow: none;
 }
 
-// svg {
-//     fill: currentColor;
-// }
-
 .checkbox_toFavorite {
   position: absolute;
   bottom: 12;
   right: 8;
-  // display: none;
-  &:checked {
-    content: 'Remove from favorites';
-    .checkmark {
-      fill: #4440f6;
-    }
-  }
+
 }
 
 .none {

@@ -44,3 +44,4 @@ window.onload = mqHandler();
 window.onload = setTheme();
 // picker()
 navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+console.log('selector', refs.pickerContainer)
