@@ -12,7 +12,7 @@ export const getSections = async () => {
   const filters = {
     sectionFilters: [],
   };
-  const data = await getNews('/svc/news/v3/content/section-list.json');
+  const {data} = await getNews('/svc/news/v3/content/section-list.json');
   if (data) {
     filters.sectionFilters = await data.results;
     saveFiltersToLocalStorage(data.results);

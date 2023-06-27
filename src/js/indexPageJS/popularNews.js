@@ -20,13 +20,15 @@ import {
 export const ICON_HEART = '/sprite.f14d31f7.svg#icon-heart';
 
 export const newsGalleryMarkup = async () => {
-  const { results } = await getNews('/svc/mostpopular/v2/viewed/1.json');
-  mainPageMarkup(results);
+  const response = await getNews('/svc/mostpopular/v2/viewed/1.json');
+  console.log('data', response.data)
+  if (!response) return;
+  mainPageMarkup(response.data.results);
   if (
     window.location.pathname === '/' ||
     window.location.pathname === '/index.html' ||
-  window.location.pathname === '/nyt-news/' ||
-  window.location.pathname === '/nyt-news/index.html'
+    window.location.pathname === '/nyt-news/' ||
+    window.location.pathname === '/nyt-news/index.html'
   ) {
     dynamicMarkup();
   }
@@ -106,8 +108,6 @@ export const insertWeatherWidget = async markup => {
   if (savedWeather.current) {
     savedLocationWeather(savedWeather);
   }
-
-
 };
 // if (
 //   window.location.pathname === '/' ||

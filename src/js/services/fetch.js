@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { refs } from '../refs/refs';
 import { getFiltersFromLocalStorage } from '../localStorage/localStorageHandler';
 
 const baseUrl = 'https://api.nytimes.com';
@@ -10,22 +11,28 @@ const lastQuery = {
 
 export const getNews = async (endpoint, searchParams) => {
   const url = `${baseUrl}${endpoint}`;
-
-  const { data } = await axios(url, {
-    params: {
-      'api-key': apiKey,
-      q: searchParams,
-    },
-  }).catch(error => {
+  try {
+    const response = await axios(url, {
+      params: {
+        'api-key': apiKey,
+        q: searchParams,
+      },
+    });
+    lastQuery.query = searchParams;
+    console.log('getNews', response);
+    return response;
+  } catch (error) {
     console.log(error);
     if (error.config.url === url) {
       console.log('error', error);
-      return error;
+      refs.newsGallery.innerHTML = '';
+      refs.newsGallery.insertAdjacentHTML(
+        'afterbegin',
+        '<h1>Nothing found</h1>'
+      );
+      // renderWeather(savedWeather);
     }
-  });
-  lastQuery.query = searchParams;
-
-  return data;
+  }
 };
 
 export const reFetchByDate = async (endpoint, dateFilter) => {
