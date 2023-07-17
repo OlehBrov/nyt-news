@@ -1,6 +1,6 @@
 # Parcel 
 
-Project is build wsth Parcel.
+Project was built with Parcel.
 
 ## About service
 
